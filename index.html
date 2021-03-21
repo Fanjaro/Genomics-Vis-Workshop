@@ -22341,423 +22341,226 @@
 
                 <div id="introduction" class="section level1">
                     <br>
-                    <h1><span class="header-section-number">1</span> <strong>概论</strong></h1>
-                    <h3>三个问题</h3>
+                    <h1><span class="header-section-number"></span> <strong>概论</strong></h1>
+                    <p style="text-inde首nt:2em">
+                        <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/blob/master/2021_03_lecture_slides_01.pdf" target="_blank"> <strong>内容总览</strong></a>
+                    </p>
+                    <h3>温故知新</h3>
+
                     <h4>
-                        <p style="text-inde首nt:2em">基因组怎么分析?</p>
+                        <p style="text-inde首nt:2em">① 基因组怎么分析?</p>
+                        <ul>
+                            <li><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Overview/01_WGS" target="_blank">WGS</a></li>
+                            <li>
+                                <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Overview/02_Denovo" target="_blank"> <i>De novo</i></a>
+                            </li>
+                        </ul>
                     </h4>
                     <h4>
-                        <p style="text-inde首nt:2em">可视化什么?</p>
+                        <p style="text-inde首nt:2em">② 可视化什么?</p>
+                        <ul>
+                            <li><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/blob/master/2021_03_lecture_slides_02.pdf" target="_blank">基因组结构与生物学注释</a></li>
+                        </ul>
                     </h4>
                     <h4>
-                        <p style="text-inde首nt:2em">比较什么?</p>
+                        <p style="text-inde首nt:2em">③ 比较什么?</p>
+                        <ul>
+                            <li><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/blob/master/2021_03_lecture_slides_03.pdf" target="_blank">结构关系</a></li>
+                            <li><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/blob/master/2021_03_lecture_slides_04.pdf" target="_blank">进化关系</a></li>
+                        </ul>
                     </h4>
                     <br>
-                    <p>分别从<strong>基因组的可视化</strong>和<strong>比较基因组可视化</strong>两块内容介绍
-                    </p>
-                    <div id="data-import-and-representation" class="section level2">
-                        <h2><span class="header-section-number">1.1</span> 基因组可视化</h2>
-                        <p style="text-indent:2em">
-                            基因组可视化，即对基因组数据进行可视化，通常指对最基本的基因组DNA序列，和注释数据等基因组相关的分析数据，按照一定的用户友好方式，使用图形元素表达出来，方便视角直观地识别已知或未知的数据模式，或者比较差异等。
-                        </p>
-                        <h3 style="text-indent:2em">快速入门：</h3>
-                        <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
-                        <ul>
-                            <li><a href="https://github.com/sanger-pathogens/Artemis" target="_blank"> Artemis</a></li>
-                            <li><a href="https://paulstothard.github.io/cgview/" target="_blank"> CGView</a></li>
-                            <li><a href="https://github.com/GMOD/Apollo" target="_blank"> Apollo</a></li>
-                            <li><a href="https://ncbiinsights.ncbi.nlm.nih.gov/tag/genome-workbench/" target="_blank"> NCBI Genome Workbench</a></li>
-                        </ul>
-                        <br>
-
-
-                        <h2 style="text-indent:2em"> <span class="header-section-number">1.1.1</span>Artemis</h2>
-                        <p style="text-indent:2em">
-                            Artemis是由Sanger开发的基因组浏览和比较基因组分析的工具能够打开和编辑基因组文件。画基因组圈图，还能查看二代测序数据的Map结果。:
-                            <a href="https://github.com/sanger-pathogens/Artemis" target="_blank">
-                                <strong>https://github.com/sanger-pathogens/Artemis</strong></a>
-                        </p>
-                        <p style="text-indent:2em"><strong>输入文件：</strong></p>
-
-                        <ul>
-                            <li>基因组文件：为细菌的基因组序列（fasta格式，或者gbk格式）</li>
-                        </ul>
-                        <a href="./Part_1/artemis/artemis_orf4.png" target="_blank">
-                            <p style="text-indent:2em"><strong>教程</strong></p>
-                        </a>
-                        <a href="./Part_1/artemis/artemis_orf4.png" target="_blank"> <img src="./Part_1/artemis/artemis_orf4.png" /> </a>
-
-                        <hr>
-                        <br>
-
-
-
-                        <h2 style="text-indent:2em"> <span class="header-section-number">1.1.2</span>CGView</h2>
-                        <p style="text-indent:2em">
-                            CGVIEW是基于java的快速绘制微生物基因组和质粒圈图软件：GC含量，GC skew- ，GC skew+ 计算；ORF，起始密码子，终止密码子等的检测。官方也提供了在线服务的网站地址:
-                            <a href="https://paulstothard.github.io/cgview/" target="_blank">
-                                <strong>https://paulstothard.github.io/cgview/</strong></a>
-                        </p>
-                        <p style="text-indent:2em"><strong>输入文件：</strong></p>
-
-                        <ul>
-                            <li>基因组文件：为细菌的基因组序列（fasta格式，或者gbk格式）</li>
-                            <li>标记基因文件：</li>
-                        </ul>
-                        <table border="2" style="BORDER-COLLAPSE: collapse">
-                            <tr>
-                                <th>seqname</th>
-                                <th>source</th>
-                                <th>feature start</th>
-                                <th>end score</th>
-                                <th>strand</th>
-                                <th>frame</th>
-                            </tr>
-                            <tr>
-                                <th>基因名字</th>
-                                <th>基因类别</th>
-                                <th>起始位置</th>
-                                <th>终止位置</th>
-                                <th>正负连</th>
-                                <th>NA</th>
-                            </tr>
-                        </table>
-                        <ul>
-                            <li>blast结果文件(m8即可)</li>
-                        </ul>
-
-                        <a href="./Part_1/CGVIEW.jpg" target="_blank"> <img src="./Part_1/CGVIEW.jpg" /> </a>
-                        <p>生成xml中间文件</p>
-                        <pre class="r"><code>perl cgview_xml_builder.pl -sequence demo.fa -output contigs.fa.xml -tick_density 0.7 -linear T -size large -gene_decoration arc -genes annotion.pos connect_seq.pos -blast gene.blast -hit_labels T </code></pre>
-                        <p>绘图</p>
-                        <pre class="r"><code>java -jar -Xmx1500m cgview.jar -i contigs.fa.xml -o map.png -f png</code></pre>
-                        <hr>
-                        <br>
-
-
-
-
-                    </div>
-                    <div id="basic-data-access-and-visualization" class="section level2">
-                        <h2><span class="header-section-number">1.2</span> 比较基因组可视化</h2>
-                        <p>The MS data in an <code>OnDiskMSnExp</code> object is organized by spectrum (similar to
-                            <em>mzML</em> files), with <code>Spectrum</code> objects used as containers for the m/z and intensity values. General spectrum information can be retrieved using the
-                            <code>msLevel</code>, <code>centroided</code>, <code>rtime</code> or <code>polarity</code> functions that return the respective value for all spectra from all files. Here, the
-                            <code>fromFile</code> function can be helpful which returns for each spectrum the index of the file in which it was measured. This is shown in the code block below.</p>
-
-                        <p>The <code>spectra</code> function can be used to retrieve the list of all spectra (from all files). This will load the full data from all raw files, which can take, depending on the size of the files and number of spectra, relatively
-                            long time and requires, depending on the experiment, a considerable amount of memory. In most cases we will however work with sub-sets of the data, and retrieving that can, in the case of indexed mzML, mzXML and CDF files,
-                            be very fast. Data objects can be subsetted using the filter functions:
-                            <code>filterFile</code>,
-                            <code>filterRtime</code>, <code>filterMz</code> or <code>filterMsLevel</code> that filter the data by file, retention time range, m/z range or MS level. To illustrate this we retrieve below all spectra measured between 180
-                            and 181 seconds. These contain the signal from all compounds that eluted from the LC in that time window. Note that we use the pipe operator <code>%&gt;%</code> from the
-                            <code>magrittr</code> package for better readability.</p>
-                        <p>The result is a <code>list</code> of <code>Spectrum</code> objects. Below we determine the number of spectra we have got.</p>
-
-
-                        <pre class="r"><code>plot(sps[[6]]) </code></pre>
-                        <div class="figure"><span id="fig:spectrum-plot"></span>
-                            <img src="" alt="Spectrum at a retention time of about 180 seconds." width="672" />
-                            <p class="caption">
-                                Figure 1: <span class="caption-title">Spectrum at a retention time of about 180
-                                    seconds</span><br>
-                            </p>
-                        </div>
-                        <p>We can immediately spot several mass peaks in the spectrum, with the largest one at a m/z of about 130 and the second largest at about 106, which matches the expected mass to charge ratio for the [M+H]+ ion (adduct) of
-                            <a href="https://en.wikipedia.org/wiki/Serine">Serine</a>. Serine in its natural state is not charged and can therefore not be measured directly with a MS instrument. Uncharged compounds, such as Serine, have thus to be first
-                            ionized to create charged molecules (e.g. using electrospray-ionization as in the present data set). Such ionization would create [M+H]+ ions of Serine, i.e. molecules that consist of Serine plus a hydrogen resulting in single
-                            charged ions (with a mass equal to sum of the masses of Serine and hydrogen).</p>
-                        <p>MS data is generally organized by spectrum, but in LC-MS experiments we analyze the data along the retention time axis and hence orthogonally to the spectral data representation. To extract data along the retention time dimension
-                            we can use the <code>chromatogram</code> function. This function aggregates intensities for each scan/retention time along the m/z axis (i.e. within each spectrum) and returns the retention time - intensity duplets in a
-                            <code>Chromatogram</code> object, one per file. The <code>Chromatogram</code> object supports, similar to the <code>Spectrum</code> object, the
-                            <code>rtime</code> and <code>intensity</code> functions to access the respective data. Below we use the <code>chromatogram</code> function to extract the total ion chromatogram (TIC) for each file and plot it. The TIC represents
-                            the sum of all measured signals per spectrum (i.e. per discrete time point) and provides thus a general information about compound separation by liquid chromatography.</p>
-
-                        <p>While both samples were measured with the same setup on the same day the two chromatograms are slightly shifted.</p>
-                        <p>Alignment can be performed with <code>xcms</code> using the <code>adjustRtime</code> function that supports the <em>peakGroups</em> <span class="citation">(Smith et al. 2006)</span> and the <em>obiwarp</em> <span class="citation">(Prince and Marcotte 2006)</span>                            method. The settings for the algorithms can be defined with the
-                            <code>PeakGroupsParam</code> and the <code>ObiwarpParam</code> parameter objects, respectively. Note also that <code>xcms</code> supports now a <em>subset-based</em> alignment which would allow to align a whole data set based
-                            on retention time shift adjustments estimated on e.g. QC samples. See the <code>xcms</code>
-                            <a href="https://bioconductor.org/packages/release/bioc/vignettes/xcms/inst/doc/xcms.html">vignette</a> for more information.</p>
-                        <p>For our example we use the peakGroups method that aligns samples based on the retention times of <em>hook peaks</em>, which should be present in most samples and which, because they are supposed to represent signal from the same
-                            ion species, can be used to estimate retention time shifts between samples. Prior to the alignment we thus have to group peaks across samples, which is accomplished by the
-                            <em>peakDensity</em> correspondence analysis method. Details about this method and explanations on the choices of its parameters are provided in the next section. After having performed this initial correspondence analysis,
-                            we perform the alignment using settings
-                            <code>minFraction = 1</code> and <code>span = 0.6</code>. <code>minFraction</code> defines the proportion of samples in which a candidate hook peak has to be detected/present. A value of 0.9 would e.g. require for a hook peak
-                            to be detected in in 90% of all samples of the experiment. Our data represents replicated measurements of the same sample pool and we can therefore require hook peaks to be present in each file. The parameter <code>span</code>                            defines the degree of smoothing of the loess function that is used to allow different regions along the retention time axis to be adjusted by a different factor. A value of 0 will most likely cause overfitting, while 1 would
-                            perform a constant, linear shift. Values between 0.4 and 0.6 seem to be reasonable for most experiments.
-                        </p>
-                    </div>
                 </div>
-                <p>The upper panel in the plot above shows the chromatographic data with the identified peaks. The lower panel shows the retention time of identified peaks (x-axis) per sample (y-axis) with the black solid line representing their distribution
-                    along the x-axis. Peak groups (features) are indicated with grey rectangles. The peak density correspondence method groups all chromatographic peaks under the same <em>density peak</em> into a feature. With the default settings we
-                    were able to group the Serine peak of each sample into a feature. The parameters for the peak density correspondence analysis are:</p>
-                <ul>
-                    <li><code>binSize</code>: m/z width of the bin/slice of data in which peaks are grouped.</li>
-                    <li><code>bw</code> defines the smoothness of the density function.</li>
-                    <li><code>maxFeatures</code>: maximum number of features to be defined in one bin.</li>
-                    <li><code>minFraction</code>: minimum proportion of samples (of one group!) for which a peak has to be present.</li>
-                    <li><code>minSamples</code>: minimum number of samples a peak has to be present.</li>
-                </ul>
-                <p>The parameters <code>minFraction</code> and <code>minSamples</code> depend on the experimental layout and should be set accordingly. <code>binSize</code> should be set to a small enough value to avoid peaks from different ions, but with
-                    similar m/z and retention time, being grouped together. The most important parameter however is
-                    <code>bw</code> and, while its default value of 30 was able to correctly group the Serine peaks, it should always be evaluated on other, more complicated, signals too. Below we evaluate the performance of the default parameters on
-                    an m/z slice that contains signal from multiple ions with the same m/z, including isomers Betaine and Valine ([M+H]+ m/z 118.08625).
+                <p>分别从<strong>基因组的可视化</strong>和<strong>比较基因组可视化</strong>两块内容进行实战操作
                 </p>
+                <div id="basic-data-access-and-visualization" class="section level2">
+                    <h1><span class="header-section-number">1</span> 基因组可视化实战</h1>
+                    <p style="text-indent:2em">
+                        基因组可视化，即对基因组数据进行可视化，通常指对最基本的基因组DNA序列，和注释数据等基因组相关的分析数据，按照一定的用户友好方式，使用图形元素表达出来，方便视角直观地识别已知或未知的数据模式，或者比较差异等。
+                    </p>
+                    <h3 style="text-indent:2em">快速入门：</h3>
+                    <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
+                    <ul>
+                        <li><a href="https://github.com/sanger-pathogens/Artemis" target="_blank"> Artemis</a></li>
+                        <li><a href="https://paulstothard.github.io/cgview/" target="_blank"> CGView</a></li>
+                        <li><a href="https://github.com/GMOD/Apollo" target="_blank"> Apollo</a></li>
+                        <li><a href="https://ncbiinsights.ncbi.nlm.nih.gov/tag/genome-workbench/" target="_blank"> NCBI Genome Workbench</a></li>
+                    </ul>
+                    <br>
+
+
+                    <h2 style="text-indent:2em"> <span class="header-section-number">1.1</span>Artemis</h2>
+                    <p style="text-indent:2em">
+                        Artemis是由Sanger开发的基因组浏览和比较基因组分析的工具能够打开和编辑基因组文件。画基因组圈图，还能查看二代测序数据的Map结果。:
+                        <a href="https://github.com/sanger-pathogens/Artemis" target="_blank">
+                            <strong>https://github.com/sanger-pathogens/Artemis</strong></a>
+                    </p>
+                    <p style="text-indent:2em"><strong>输入文件：</strong></p>
+
+                    <ul>
+                        <li>基因组文件：为细菌的基因组序列（fasta格式，或者gbk格式）</li>
+                    </ul>
+                    <a href="./Part_1/artemis/artemis_orf4.png" target="_blank">
+                        <p style="text-indent:2em"><strong>教程</strong></p>
+                    </a>
+                    <a href="./Part_1/artemis/artemis_orf4.png" target="_blank"> <img src="./Part_1/artemis/artemis_orf4.png" /> </a>
+
+                    <hr>
+                    <br>
+
+                    <h2 style="text-indent:2em"> <span class="header-section-number">1.2</span>CGView</h2>
+                    <p style="text-indent:2em">
+                        CGVIEW是基于java的快速绘制微生物基因组和质粒圈图软件：GC含量，GC skew- ，GC skew+ 计算；ORF，起始密码子，终止密码子等的检测。官方也提供了在线服务的网站地址:
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
+                    </p>
+                    <p style="text-indent:2em"><strong>输入文件：</strong></p>
+
+                    <ul>
+                        <li>基因组文件：为细菌的基因组序列（fasta格式，或者gbk格式）</li>
+                        <li>标记基因文件：</li>
+                    </ul>
+                    <table border="2" style="BORDER-COLLAPSE: collapse">
+                        <tr>
+                            <th>seqname</th>
+                            <th>source</th>
+                            <th>feature start</th>
+                            <th>end score</th>
+                            <th>strand</th>
+                            <th>frame</th>
+                        </tr>
+                        <tr>
+                            <th>基因名字</th>
+                            <th>基因类别</th>
+                            <th>起始位置</th>
+                            <th>终止位置</th>
+                            <th>正负连</th>
+                            <th>NA</th>
+                        </tr>
+                    </table>
+                    <ul>
+                        <li>blast结果文件(m8即可)</li>
+                    </ul>
+
+                    <a href="./Part_1/CGVIEW.jpg" target="_blank"> <img src="./Part_1/CGVIEW.jpg" /> </a>
+                    <p>生成xml中间文件</p>
+                    <pre class="r"><code>perl cgview_xml_builder.pl -sequence demo.fa -output contigs.fa.xml -tick_density 0.7 -linear T -size large -gene_decoration arc -genes annotion.pos connect_seq.pos -blast gene.blast -hit_labels T </code></pre>
+                    <p>绘图</p>
+                    <pre class="r"><code>java -jar -Xmx1500m cgview.jar -i contigs.fa.xml -o map.png -f png</code></pre>
+                    <hr>
+                    <br>
+
+                    <h2 style="text-indent:2em"> <span class="header-section-number">1.3</span>Circos</h2>
+                    <p style="text-indent:2em">
+                        CGVIEW是基于java的快速绘制微生物基因组和质粒圈图软件：GC含量，GC skew- ，GC skew+ 计算；ORF，起始密码子，终止密码子等的检测。官方也提供了在线服务的网站地址:
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
+                    </p>
+
+                </div>
+                <div id="basic-data-access-and-visualization" class="section level2">
+                    <h1><span class="header-section-number">2</span> 比较基因组可视化实战</h1>
+                    <p style="text-indent:2em">比较基因组学(Comparative Genomics)是基于基因组图谱和测序基础上，对已知的基因和基因组结构进行比较，来了解基因的功能、表达机理和物种进化的学科。利用模式生物基因组与人类基因组之间编码顺序上和结构上的同源性，克隆人类疾病基因，揭示基因功能和疾病分子机制， 阐明物种进化关系，及基因组的内在结构。
+                    </p>
+                    <h3 style="text-indent:2em">快速入门：</h3>
+                    <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
+                    <ul>
+                        <li><a href="https://github.com/sanger-pathogens/Artemis" target="_blank"> Artemis Comparison Tool (ACT)</a></li>
+                        <li><a href="http://www.darlinglab.org/mauve/mauve.html" target="_blank"> Mauve</a></li>
+                    </ul>
+                    <br>
+
+                    <h2 style="text-indent:2em"> <span class="header-section-number">2.1</span>ACT</h2>
+                    <p style="text-indent:2em">
+                        Artemis Comparison Tool (ACT) 是一个显示两个或多个DNA序列之间成对比较的工具。它可以用于识别和分析基因组之间的相似和差异区域，并在整个序列及其注释的背景下探索同线性的保守性。
+                    </p>
+                    <p style="text-indent:2em"><strong>输入文件：</strong></p>
+
+
+                    <h2 style="text-indent:2em"> <span class="header-section-number">2.2</span>Mauve</h2>
+                    <p style="text-indent:2em">
+                        Mauve软件可用于构建多个基因组比对中存在的大规模进化事件，如重排和倒位。多基因组比对结果可为比较基因组学和全基因组进化动力学研究提供了基础。
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
+                    </p>
+                    <p style="text-indent:2em"><strong>输入文件：</strong></p>
+
+                    <h2 style="text-indent:2em"> <span class="header-section-number">2.3</span>MCscan</h2>
+                    <p style="text-indent:2em">
+                        Mauve软件可用于构建多个基因组比对中存在的大规模进化事件，如重排和倒位。多基因组比对结果可为比较基因组学和全基因组进化动力学研究提供了基础。
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
+                    </p>
+                    <p style="text-indent:2em"><strong>输入文件：</strong></p>
 
 
 
+                    <h2 style="text-indent:2em"> <span class="header-section-number">2.4</span>BRIG</h2>
+                    <p style="text-indent:2em">
+                        Mauve软件可用于构建多个基因组比对中存在的大规模进化事件，如重排和倒位。多基因组比对结果可为比较基因组学和全基因组进化动力学研究提供了基础。
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
+                    </p>
+                    <p style="text-indent:2em"><strong>输入文件：</strong></p>
 
-
+                    <h2 style="text-indent:2em"> <span class="header-section-number">2.5</span>genoPlotR</h2>
+                    <p style="text-indent:2em">
+                        Mauve软件可用于构建多个基因组比对中存在的大规模进化事件，如重排和倒位。多基因组比对结果可为比较基因组学和全基因组进化动力学研究提供了基础。
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
+                    </p>
+                    <p style="text-indent:2em"><strong>输入文件：</strong></p>
+                </div>
 
 
 
                 <div id="introduction" class="section level1">
-                    <h1><span class="header-section-number">2</span> Circos<i> </i></h1>
-                    <p>Preprocessing of untargeted metabolomics data is the first step in the analysis of GC/LS-MS based untargeted metabolomics experiments. The aim of the preprocessing is the quantification of signals from ion species measured in a sample
-                        and matching of these entities across samples within an experiment. The resulting two-dimensional matrix with feature abundances in all samples can then be further processed, e.g. by normalizing the data to remove sampling differences,
-                        batch effects or injection order-dependent signal drifts. Another crucial step in untargeted metabolomics analysis is the annotation of the (m/z-retention time) features to the actual ions and metabolites they represent. Note that
-                        data normalization and annotation are not covered in this document.</p>
-                    <p>People familiar with the concepts of mass spectrometry or LC-MS data analysis may jump directly to the next section.</p>
-                    <div id="prerequisites" class="section level1">
-                        <h2><span class="header-section-number">2.1</span> Circos 安装<i> </i></h2>
-                        <p>The analysis in this document requires an R version &gt;= 4.0.0 and recent versions of the
-                            <code>MSnbase</code> and <code>xcms</code> (version &gt;= 3.11.3 is needed) packages. The packages can be installed with:</p>
-                        <pre class="r"><code>#&#39; Install the Bioconductor package manager
-install.packages(&quot;BiocManager&quot;)
-
-#&#39; Install the required packages
-BiocManager::install(c(&quot;xcms&quot;,
-                       &quot;MSnbase&quot;,
-                       &quot;msdata&quot;,
-                       &quot;magrittr&quot;,
-                       &quot;png&quot;))</code></pre>
-                        <p>Because <code>xcms</code> version 3.11.3 is a developmental version we might have to install it from github if the required version was not installed with the previous command.</p>
-                        <pre class="r"><code>if (!packageVersion(&quot;xcms&quot;) &gt;= &quot;3.11.3&quot;) {
-    Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS=&quot;true&quot;)
-    devtools::install_github(&quot;sneumann/xcms&quot;)
-}</code></pre>
-                        <p>The
-                            <a href="https://github.com/jorainer/metabolomics2018/blob/master/xcms-preprocessing.Rmd">xcms-preprocessing.Rmd</a> file with all the code for the analysis can be downloaded from [github] (
-                            <a href="https://github.com/jorainer/metabolomics2018" class="uri">https://github.com/jorainer/metabolomics2018</a>) ideally with <code>git
-                                clone https://github.com/jorainer/metabolomics2018</code> from the command line.</p>
-                    </div>
-                    <div id="mass-spectrometry" class="section level2">
-                        <h2><span class="header-section-number">2.2</span> Circos 使用</h2>
-                        <p>Mass spectrometry allows to measure abundances of charged molecules (ions) in a sample. Abundances are determined as ion counts for a specific mass-to-charge ratio m/z. The measured signal is represented as a spectrum: intensities
-                            along m/z.
-                        </p>
-                        <p><img src="" /></p>
-                        <p>Many ions have the same or a very similar m/z making it difficult or impossible to discriminate them. MS is thus frequently coupled with a second technology to separate analytes based on other properties than their mass (or rather
-                            m/z). Common choices are gas chromatography (GC) or liquid chromatography (LC). Such an e.g. LC-MS setup performs scans at discrete time points resulting in a set of spectra for a given sample, with allows to separate compounds
-                            (ions) on m/z and on retention time dimension.</p>
-                        <p><img src="" /></p>
-                        <p>In such GC/LC-MS based untargeted metabolomics experiments the data is analyzed along the retention time dimension and <em>chromatographic</em> peaks (which are supposed to represent the signal from a ion species) are identified
-                            and quantified.
-                        </p>
-                    </div>
-                </div>
-                <div id="introduction" class="section level1">
-                    <h1><span class="header-section-number">3</span> BRIG</h1>
-                    <p>This workflow describes the basic data handling (I/O) of mass spectrometry data using the <em><a
-                                href="https://bioconductor.org/packages/3.12/MSnbase">MSnbase</a></em> package, and the LC/GC-MS data preprocessing using <em><a
-                                href="https://bioconductor.org/packages/3.12/xcms">xcms</a></em>. It showcases the new functionality and user interface functions of <code>xcms</code>, that re-use functionality from the <code>MSnbase</code> package. The
-                        first part of the workflow is focused on data import, access and visualization which is followed by the description of a simple data centroiding approach and finally the
-                        <code>xcms</code>-based LC-MS data preprocessing that comprises chromatographic peak detection, alignment and correspondence. The workflow does not cover data normalization procedures, compound identification and differential abundance
-                        analysis.
+                    <h1><span class="header-section-number">3</span> Orthologues<i> </i></h1>
+                    <h2 style="text-indent:2em"> <span class="header-section-number">3.1</span>OrthoFinder</h2>
+                    <p style="text-indent:2em">
+                        Mauve软件可用于构建多个基因组比对中存在的大规模进化事件，如重排和倒位。多基因组比对结果可为比较基因组学和全基因组进化动力学研究提供了基础。
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
                     </p>
-                    <div id="data-import-and-representation" class="section level2">
-                        <h2><span class="header-section-number">3.1</span> BRIG 安装</h2>
-                        <p>The example data set of this workflow consists of two files in mzML format with signals from pooled human serum samples measured with a ultra high performance liquid chromatography (UHPLC) system (Agilent 1290) coupled with a Q-TOF
-                            MS (TripleTOF 5600+ AB Sciex) instrument. Chromatographic separation was based on hydrophilic interaction liquid chromatography (HILIC) separating metabolites depending on their polarity. The setup thus allows to measure small
-                            polar compounds and hence metabolites from the main metabolic pathways. The input files contain all signals measured by the MS instrument (so called <em>profile
-                                mode</em> data). To reduce file sizes, the data set was restricted to an m/z range from 105 to 134 and retention times from 0 to 260 seconds.</p>
-                        <p>In the code block below we first load all required libraries and define the location of the mzML files, which are part of the <code>msdata</code> package. We also define a
-                            <code>data.frame</code> describing the samples/experiment and pass this to the
-                            <code>readMSData</code> function which imports the data. The option <code>mode =
-                                &quot;onDisk&quot;</code> tells the function to read only general metadata into memory. The m/z and intensity values are not imported but retrieved from the original files on demand, which enables also analyses of very
-                            large experiments.
-                        </p>
-                        <p>The MS experiment data is now represented as an <code>OnDiskMSnExp</code> object. Phenotype information can be retrieved with the <code>pData</code> function, single columns in the phenotype table using <code>$</code>. Below we
-                            access sample descriptions.</p>
-                        <pre class="r"><code>#&#39; Access phenotype information
-pData(data)</code></pre>
-                        <pre class="r"><code>#&#39; Or individual columns directly using the $ operator
-data$injection_idx </code></pre>
-                        <pre><code>## [1]  1 19</code></pre>
-                        <p>General information on each spectrum in the experiment can be accessed with the
-                            <code>fData</code> function, that returns a <code>data.frame</code> each row with metadata information for one spectrum.</p>
-                        <pre class="r"><code>#&#39; Access spectrum header information
-head(fData(data), n = 3) </code></pre>
 
-                    </div>
-                    <div id="basic-data-access-and-visualization" class="section level2">
-                        <h2><span class="header-section-number">3.2</span> BRIG 使用</h2>
-                        <p>The MS data in an <code>OnDiskMSnExp</code> object is organized by spectrum (similar to
-                            <em>mzML</em> files), with <code>Spectrum</code> objects used as containers for the m/z and intensity values. General spectrum information can be retrieved using the
-                            <code>msLevel</code>, <code>centroided</code>, <code>rtime</code> or <code>polarity</code> functions that return the respective value for all spectra from all files. Here, the
-                            <code>fromFile</code> function can be helpful which returns for each spectrum the index of the file in which it was measured. This is shown in the code block below.</p>
-
-                        <p>The <code>spectra</code> function can be used to retrieve the list of all spectra (from all files). This will load the full data from all raw files, which can take, depending on the size of the files and number of spectra, relatively
-                            long time and requires, depending on the experiment, a considerable amount of memory. In most cases we will however work with sub-sets of the data, and retrieving that can, in the case of indexed mzML, mzXML and CDF files,
-                            be very fast. Data objects can be subsetted using the filter functions:
-                            <code>filterFile</code>,
-                            <code>filterRtime</code>, <code>filterMz</code> or <code>filterMsLevel</code> that filter the data by file, retention time range, m/z range or MS level. To illustrate this we retrieve below all spectra measured between 180
-                            and 181 seconds. These contain the signal from all compounds that eluted from the LC in that time window. Note that we use the pipe operator <code>%&gt;%</code> from the
-                            <code>magrittr</code> package for better readability.</p>
-                        <p>The result is a <code>list</code> of <code>Spectrum</code> objects. Below we determine the number of spectra we have got.</p>
+                    <h2 style="text-indent:2em"> <span class="header-section-number">3.2</span>Roary</h2>
+                    <p style="text-indent:2em">
+                        Mauve软件可用于构建多个基因组比对中存在的大规模进化事件，如重排和倒位。多基因组比对结果可为比较基因组学和全基因组进化动力学研究提供了基础。
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
+                    </p>
 
 
-                        <pre class="r"><code>plot(sps[[6]]) </code></pre>
-                        <div class="figure"><span id="fig:spectrum-plot"></span>
-                            <img src="" alt="Spectrum at a retention time of about 180 seconds." width="672" />
-                            <p class="caption">
-                                Figure 1: <span class="caption-title">Spectrum at a retention time of about 180
-                                    seconds</span><br>
-                            </p>
-                        </div>
-                        <p>We can immediately spot several mass peaks in the spectrum, with the largest one at a m/z of about 130 and the second largest at about 106, which matches the expected mass to charge ratio for the [M+H]+ ion (adduct) of
-                            <a href="https://en.wikipedia.org/wiki/Serine">Serine</a>. Serine in its natural state is not charged and can therefore not be measured directly with a MS instrument. Uncharged compounds, such as Serine, have thus to be first
-                            ionized to create charged molecules (e.g. using electrospray-ionization as in the present data set). Such ionization would create [M+H]+ ions of Serine, i.e. molecules that consist of Serine plus a hydrogen resulting in single
-                            charged ions (with a mass equal to sum of the masses of Serine and hydrogen).</p>
-                        <p>MS data is generally organized by spectrum, but in LC-MS experiments we analyze the data along the retention time axis and hence orthogonally to the spectral data representation. To extract data along the retention time dimension
-                            we can use the <code>chromatogram</code> function. This function aggregates intensities for each scan/retention time along the m/z axis (i.e. within each spectrum) and returns the retention time - intensity duplets in a
-                            <code>Chromatogram</code> object, one per file. The <code>Chromatogram</code> object supports, similar to the <code>Spectrum</code> object, the
-                            <code>rtime</code> and <code>intensity</code> functions to access the respective data. Below we use the <code>chromatogram</code> function to extract the total ion chromatogram (TIC) for each file and plot it. The TIC represents
-                            the sum of all measured signals per spectrum (i.e. per discrete time point) and provides thus a general information about compound separation by liquid chromatography.</p>
-
-                        <p>While both samples were measured with the same setup on the same day the two chromatograms are slightly shifted.</p>
-                        <p>Alignment can be performed with <code>xcms</code> using the <code>adjustRtime</code> function that supports the <em>peakGroups</em> <span class="citation">(Smith et al. 2006)</span> and the <em>obiwarp</em> <span class="citation">(Prince and Marcotte 2006)</span>                            method. The settings for the algorithms can be defined with the
-                            <code>PeakGroupsParam</code> and the <code>ObiwarpParam</code> parameter objects, respectively. Note also that <code>xcms</code> supports now a <em>subset-based</em> alignment which would allow to align a whole data set based
-                            on retention time shift adjustments estimated on e.g. QC samples. See the <code>xcms</code>
-                            <a href="https://bioconductor.org/packages/release/bioc/vignettes/xcms/inst/doc/xcms.html">vignette</a> for more information.</p>
-                        <p>For our example we use the peakGroups method that aligns samples based on the retention times of <em>hook peaks</em>, which should be present in most samples and which, because they are supposed to represent signal from the same
-                            ion species, can be used to estimate retention time shifts between samples. Prior to the alignment we thus have to group peaks across samples, which is accomplished by the
-                            <em>peakDensity</em> correspondence analysis method. Details about this method and explanations on the choices of its parameters are provided in the next section. After having performed this initial correspondence analysis,
-                            we perform the alignment using settings
-                            <code>minFraction = 1</code> and <code>span = 0.6</code>. <code>minFraction</code> defines the proportion of samples in which a candidate hook peak has to be detected/present. A value of 0.9 would e.g. require for a hook peak
-                            to be detected in in 90% of all samples of the experiment. Our data represents replicated measurements of the same sample pool and we can therefore require hook peaks to be present in each file. The parameter <code>span</code>                            defines the degree of smoothing of the loess function that is used to allow different regions along the retention time axis to be adjusted by a different factor. A value of 0 will most likely cause overfitting, while 1 would
-                            perform a constant, linear shift. Values between 0.4 and 0.6 seem to be reasonable for most experiments.
-                        </p>
-                    </div>
                 </div>
-                <p>The upper panel in the plot above shows the chromatographic data with the identified peaks. The lower panel shows the retention time of identified peaks (x-axis) per sample (y-axis) with the black solid line representing their distribution
-                    along the x-axis. Peak groups (features) are indicated with grey rectangles. The peak density correspondence method groups all chromatographic peaks under the same <em>density peak</em> into a feature. With the default settings we
-                    were able to group the Serine peak of each sample into a feature. The parameters for the peak density correspondence analysis are:</p>
-                <ul>
-                    <li><code>binSize</code>: m/z width of the bin/slice of data in which peaks are grouped.</li>
-                    <li><code>bw</code> defines the smoothness of the density function.</li>
-                    <li><code>maxFeatures</code>: maximum number of features to be defined in one bin.</li>
-                    <li><code>minFraction</code>: minimum proportion of samples (of one group!) for which a peak has to be present.</li>
-                    <li><code>minSamples</code>: minimum number of samples a peak has to be present.</li>
-                </ul>
-                <p>The parameters <code>minFraction</code> and <code>minSamples</code> depend on the experimental layout and should be set accordingly. <code>binSize</code> should be set to a small enough value to avoid peaks from different ions, but with
-                    similar m/z and retention time, being grouped together. The most important parameter however is
-                    <code>bw</code> and, while its default value of 30 was able to correctly group the Serine peaks, it should always be evaluated on other, more complicated, signals too. Below we evaluate the performance of the default parameters on
-                    an m/z slice that contains signal from multiple ions with the same m/z, including isomers Betaine and Valine ([M+H]+ m/z 118.08625).
-                </p>
-
-
 
                 <div id="introduction" class="section level1">
-                    <h1><span class="header-section-number">4</span> genoPlotR</h1>
-                    <p>This workflow describes the basic data handling (I/O) of mass spectrometry data using the <em><a
-                                href="https://bioconductor.org/packages/3.12/MSnbase">MSnbase</a></em> package, and the LC/GC-MS data preprocessing using <em><a
-                                href="https://bioconductor.org/packages/3.12/xcms">xcms</a></em>. It showcases the new functionality and user interface functions of <code>xcms</code>, that re-use functionality from the <code>MSnbase</code> package. The
-                        first part of the workflow is focused on data import, access and visualization which is followed by the description of a simple data centroiding approach and finally the
-                        <code>xcms</code>-based LC-MS data preprocessing that comprises chromatographic peak detection, alignment and correspondence. The workflow does not cover data normalization procedures, compound identification and differential abundance
-                        analysis.
+                    <h1><span class="header-section-number">4</span> Phylogenetic</h1>
+                    <h2 style="text-indent:2em"> <span class="header-section-number">4.1</span>ggtree</h2>
+                    <p style="text-indent:2em">
+                        Mauve软件可用于构建多个基因组比对中存在的大规模进化事件，如重排和倒位。多基因组比对结果可为比较基因组学和全基因组进化动力学研究提供了基础。
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
                     </p>
-                    <div id="data-import-and-representation" class="section level2">
-                        <h2><span class="header-section-number">4.1</span> genoPlotR 安装</h2>
-                        <p>The example data set of this workflow consists of two files in mzML format with signals from pooled human serum samples measured with a ultra high performance liquid chromatography (UHPLC) system (Agilent 1290) coupled with a Q-TOF
-                            MS (TripleTOF 5600+ AB Sciex) instrument. Chromatographic separation was based on hydrophilic interaction liquid chromatography (HILIC) separating metabolites depending on their polarity. The setup thus allows to measure small
-                            polar compounds and hence metabolites from the main metabolic pathways. The input files contain all signals measured by the MS instrument (so called <em>profile
-                                mode</em> data). To reduce file sizes, the data set was restricted to an m/z range from 105 to 134 and retention times from 0 to 260 seconds.</p>
-                        <p>In the code block below we first load all required libraries and define the location of the mzML files, which are part of the <code>msdata</code> package. We also define a
-                            <code>data.frame</code> describing the samples/experiment and pass this to the
-                            <code>readMSData</code> function which imports the data. The option <code>mode =
-                                &quot;onDisk&quot;</code> tells the function to read only general metadata into memory. The m/z and intensity values are not imported but retrieved from the original files on demand, which enables also analyses of very
-                            large experiments.
-                        </p>
-                        <p>The MS experiment data is now represented as an <code>OnDiskMSnExp</code> object. Phenotype information can be retrieved with the <code>pData</code> function, single columns in the phenotype table using <code>$</code>. Below we
-                            access sample descriptions.</p>
-                        <pre class="r"><code>#&#39; Access phenotype information
-pData(data)</code></pre>
-                        <pre class="r"><code>#&#39; Or individual columns directly using the $ operator
-data$injection_idx </code></pre>
-                        <pre><code>## [1]  1 19</code></pre>
-                        <p>General information on each spectrum in the experiment can be accessed with the
-                            <code>fData</code> function, that returns a <code>data.frame</code> each row with metadata information for one spectrum.</p>
-                        <pre class="r"><code>#&#39; Access spectrum header information
-head(fData(data), n = 3) </code></pre>
 
-                    </div>
-                    <div id="basic-data-access-and-visualization" class="section level2">
-                        <h2><span class="header-section-number">4.2</span> genoPlotR 使用</h2>
-                        <p>The MS data in an <code>OnDiskMSnExp</code> object is organized by spectrum (similar to
-                            <em>mzML</em> files), with <code>Spectrum</code> objects used as containers for the m/z and intensity values. General spectrum information can be retrieved using the
-                            <code>msLevel</code>, <code>centroided</code>, <code>rtime</code> or <code>polarity</code> functions that return the respective value for all spectra from all files. Here, the
-                            <code>fromFile</code> function can be helpful which returns for each spectrum the index of the file in which it was measured. This is shown in the code block below.</p>
-
-                        <p>The <code>spectra</code> function can be used to retrieve the list of all spectra (from all files). This will load the full data from all raw files, which can take, depending on the size of the files and number of spectra, relatively
-                            long time and requires, depending on the experiment, a considerable amount of memory. In most cases we will however work with sub-sets of the data, and retrieving that can, in the case of indexed mzML, mzXML and CDF files,
-                            be very fast. Data objects can be subsetted using the filter functions:
-                            <code>filterFile</code>,
-                            <code>filterRtime</code>, <code>filterMz</code> or <code>filterMsLevel</code> that filter the data by file, retention time range, m/z range or MS level. To illustrate this we retrieve below all spectra measured between 180
-                            and 181 seconds. These contain the signal from all compounds that eluted from the LC in that time window. Note that we use the pipe operator <code>%&gt;%</code> from the
-                            <code>magrittr</code> package for better readability.</p>
-                        <p>The result is a <code>list</code> of <code>Spectrum</code> objects. Below we determine the number of spectra we have got.</p>
+                    <h2 style="text-indent:2em"> <span class="header-section-number">4.2</span>iTOL</h2>
+                    <p style="text-indent:2em">
+                        Mauve软件可用于构建多个基因组比对中存在的大规模进化事件，如重排和倒位。多基因组比对结果可为比较基因组学和全基因组进化动力学研究提供了基础。
+                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                            <strong>https://paulstothard.github.io/cgview/</strong></a>
+                    </p>
 
 
-                        <pre class="r"><code>plot(sps[[6]]) </code></pre>
-                        <div class="figure"><span id="fig:spectrum-plot"></span>
-                            <img src="" alt="Spectrum at a retention time of about 180 seconds." width="672" />
-                            <p class="caption">
-                                Figure 1: <span class="caption-title">Spectrum at a retention time of about 180
-                                    seconds</span><br>
-                            </p>
-                        </div>
-                        <p>We can immediately spot several mass peaks in the spectrum, with the largest one at a m/z of about 130 and the second largest at about 106, which matches the expected mass to charge ratio for the [M+H]+ ion (adduct) of
-                            <a href="https://en.wikipedia.org/wiki/Serine">Serine</a>. Serine in its natural state is not charged and can therefore not be measured directly with a MS instrument. Uncharged compounds, such as Serine, have thus to be first
-                            ionized to create charged molecules (e.g. using electrospray-ionization as in the present data set). Such ionization would create [M+H]+ ions of Serine, i.e. molecules that consist of Serine plus a hydrogen resulting in single
-                            charged ions (with a mass equal to sum of the masses of Serine and hydrogen).</p>
-                        <p>MS data is generally organized by spectrum, but in LC-MS experiments we analyze the data along the retention time axis and hence orthogonally to the spectral data representation. To extract data along the retention time dimension
-                            we can use the <code>chromatogram</code> function. This function aggregates intensities for each scan/retention time along the m/z axis (i.e. within each spectrum) and returns the retention time - intensity duplets in a
-                            <code>Chromatogram</code> object, one per file. The <code>Chromatogram</code> object supports, similar to the <code>Spectrum</code> object, the
-                            <code>rtime</code> and <code>intensity</code> functions to access the respective data. Below we use the <code>chromatogram</code> function to extract the total ion chromatogram (TIC) for each file and plot it. The TIC represents
-                            the sum of all measured signals per spectrum (i.e. per discrete time point) and provides thus a general information about compound separation by liquid chromatography.</p>
 
-                        <p>While both samples were measured with the same setup on the same day the two chromatograms are slightly shifted.</p>
-                        <p>Alignment can be performed with <code>xcms</code> using the <code>adjustRtime</code> function that supports the <em>peakGroups</em> <span class="citation">(Smith et al. 2006)</span> and the <em>obiwarp</em> <span class="citation">(Prince and Marcotte 2006)</span>                            method. The settings for the algorithms can be defined with the
-                            <code>PeakGroupsParam</code> and the <code>ObiwarpParam</code> parameter objects, respectively. Note also that <code>xcms</code> supports now a <em>subset-based</em> alignment which would allow to align a whole data set based
-                            on retention time shift adjustments estimated on e.g. QC samples. See the <code>xcms</code>
-                            <a href="https://bioconductor.org/packages/release/bioc/vignettes/xcms/inst/doc/xcms.html">vignette</a> for more information.</p>
-                        <p>For our example we use the peakGroups method that aligns samples based on the retention times of <em>hook peaks</em>, which should be present in most samples and which, because they are supposed to represent signal from the same
-                            ion species, can be used to estimate retention time shifts between samples. Prior to the alignment we thus have to group peaks across samples, which is accomplished by the
-                            <em>peakDensity</em> correspondence analysis method. Details about this method and explanations on the choices of its parameters are provided in the next section. After having performed this initial correspondence analysis,
-                            we perform the alignment using settings
-                            <code>minFraction = 1</code> and <code>span = 0.6</code>. <code>minFraction</code> defines the proportion of samples in which a candidate hook peak has to be detected/present. A value of 0.9 would e.g. require for a hook peak
-                            to be detected in in 90% of all samples of the experiment. Our data represents replicated measurements of the same sample pool and we can therefore require hook peaks to be present in each file. The parameter <code>span</code>                            defines the degree of smoothing of the loess function that is used to allow different regions along the retention time axis to be adjusted by a different factor. A value of 0 will most likely cause overfitting, while 1 would
-                            perform a constant, linear shift. Values between 0.4 and 0.6 seem to be reasonable for most experiments.
-                        </p>
-                    </div>
                 </div>
-                <p>The upper panel in the plot above shows the chromatographic data with the identified peaks. The lower panel shows the retention time of identified peaks (x-axis) per sample (y-axis) with the black solid line representing their distribution
-                    along the x-axis. Peak groups (features) are indicated with grey rectangles. The peak density correspondence method groups all chromatographic peaks under the same <em>density peak</em> into a feature. With the default settings we
-                    were able to group the Serine peak of each sample into a feature. The parameters for the peak density correspondence analysis are:</p>
-                <ul>
-                    <li><code>binSize</code>: m/z width of the bin/slice of data in which peaks are grouped.</li>
-                    <li><code>bw</code> defines the smoothness of the density function.</li>
-                    <li><code>maxFeatures</code>: maximum number of features to be defined in one bin.</li>
-                    <li><code>minFraction</code>: minimum proportion of samples (of one group!) for which a peak has to be present.</li>
-                    <li><code>minSamples</code>: minimum number of samples a peak has to be present.</li>
-                </ul>
-                <p>The parameters <code>minFraction</code> and <code>minSamples</code> depend on the experimental layout and should be set accordingly. <code>binSize</code> should be set to a small enough value to avoid peaks from different ions, but with
-                    similar m/z and retention time, being grouped together. The most important parameter however is
-                    <code>bw</code> and, while its default value of 30 was able to correctly group the Serine peaks, it should always be evaluated on other, more complicated, signals too. Below we evaluate the performance of the default parameters on
-                    an m/z slice that contains signal from multiple ions with the same m/z, including isomers Betaine and Valine ([M+H]+ m/z 118.08625).
-                </p>
 
+                <div id="introduction" class="section level1">
+                    <h1><span class="header-section-number">5</span> General Bioinformatics Resources</h1>
+                    <p> Helpful resources for microbial genomics Omictools Bioinformatics One-liners by Stephen Turner QC Fail: Explaining your errors Short read processing FastQC Trimmomatic: Home Manual bwa bowtie samtools vcftools bcftools gatk picard
+                        SPANDx Snippy Genome assembly Spades Velvet Mira A5 Genome alignment Mauve MUMmer Mugsy Visualization of genomic data Artemis Artemis Comparison Tool IGV Genome annotation Prokka Blastall LS-BSR Phylogenetic tools and resources
+                        Visualization Seaview iTOL Figtree Phylogenetic software PAUP RaxML PhyML BEAST PHYLIP APE Microreact Recombination detection Gubbins ClonalFrame List of Phylogeny Programs Databases ARDB PATRIC Video Resources you should watch
+                        and follow FastQC NHGRI Broad Institute Cold Spring Harbor Lab NCBI Bioinformatics courses from MIT Youtube Channel of Rafael Irizarry covering various topics on NGS analysis and statistics involved in it. 101 Questions: a series
+                        of interviews with notable bioinformaticians Bioinformatics is just like bench science and should be treated as such Unix/Command line command-line bootcamp Code academy</p>
+                </div>
 
 
                 <div id="references" class="section level1 unnumbered">
