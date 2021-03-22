@@ -57,8 +57,6 @@ tabix -p gff sorted.gff.gz
 
 ### 软件界面:
 
-https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img
-
 ![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_splash.png)
 <hr>
 
