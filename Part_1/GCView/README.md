@@ -1,89 +1,63 @@
 # GCView
 
-## Installation 
+## 网页版：
 
-### Installing Java
-The current Java 11 version can always be obtained from https://jdk.java.net/archive/. 
+http://cgview.ca
+
+打开网页并提交基因组.fasta序列
+![avatar](./Sever.png)
+
+## 本地版：
+### 使用过程：：
+1   文件准备以及格式：
+
+1）  基因组文件：为细菌的基因组序列（fasta格式，或者gbk格式）
+
+2）  标记基因文件：表头必须为以下8列（红色列必须给出，其他列的值可空或者用‘.’代替）
+ 
+|seqname |source|feature|start|end|score|strand|frame|
+---
+<table>
+        <tr>
+            <th>seqname</th>
+            <th>feature</th>
+            <th>start</th>
+            <th>end</th>
+            <th>strand</th>
+        </tr>
+        <tr>
+            <th>基因名字</th>
+            <th>基因类别</th>
+            <th>起始位置</th>
+            <th>终止位置</th>
+            <th>正负连</th>
+        </tr>
+        </tr>
+    </table>
+
+3）  blast结果文件（输出m8即可）
+
+这些列必须得有数据：
+query_id
+
+%_identity
+
+q_start
+
+q_end
+
+alignment_length
+
+evalue
+
+
+
+#### 生成XML文件：
+```sh
+perl /share/work/biosoft/CGView/cgview/cgview_xml_builder/cgview_xml_builder.pl -sequence demo.fa -output contigs.fa.xml -tick_density 0.7  -linear T -size  large  -gene_decoration arc -genes annotion1.pos connect_seq.pos -blast gene.blast -hit_labels T
+```
 
 ```sh
-$ tar xvf openjdk-11*_bin.tar.gz
-#or
-$ unzip openjdk-11*_bin.zip
-
-$ sudo apt update
-
-$ sudo apt install default-jdk
-
-$ java -version
-
-$ export JAVA_HOME=”/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home”
-
-$ export PATH="$JAVA_HOME/bin:$PATH"
-```
----
-
-
-### Sequence and Annotation File Formats
-
-•     EMBL format.
- 
-•     GenBank format.
- 
-•     GFF3 format. 
- 
-•     FASTA nucleotide sequence files can be one of the following:
- 
-•      Single FASTA sequence.
- 
-•      Multiple FASTA sequence. 
- 
-•      Indexed FASTA files can be read in. The files are indexed using SAMtools:
-
-```
-samtools faidx ref.fasta
+java -jar -Xmx1500m /share/work/biosoft/CGView/cgview/cgview.jar -i contigs.fa.xml -o map.png -f png
 ```
 
-•     Indexed GFF3 format. This can be read in and overlaid onto an indexed FASTA file. The indexed GFF3 file contains the feature annotations. To index the GFF first sort and bgzip the file and then use tabix with "-p gff" option (see the tabix manual):
- ```
-(grep ^"#" in.gff; grep -v ^"#" in.gff | sort -k1,1 -k4,4n) | bgzip >
-sorted.gff.gz;
- ```
- ```
-tabix -p gff sorted.gff.gz
- ```
- ---
-# Tutorial
-<br>
-
-### 软件界面:
-
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_splash.png)
-<hr>
-
-### 读取文件
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_cdspred0.png)
-<hr>
-
-### 选择读取文件并打开
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_files.png)
-<hr>
-
-### 读取 fasta 文件
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_loaded_seq.png)
-<hr>
-
-### 读取 gff 文件
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_loaded_contigs.png)
-<hr>
-
-### 选择条件高亮CDS
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf0.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf1.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf2.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf3.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf4.png)
-<hr>
-
-### 查看感兴趣的基因
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf5.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf6.png)

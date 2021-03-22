@@ -57,33 +57,30 @@ tabix -p gff sorted.gff.gz
 
 ### 软件界面:
 
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_splash.png)
-<hr>
+<img src="img/artemis_cdspred0.png"/> </a>
 
-### 读取文件
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_cdspred0.png)
 <hr>
 
 ### 选择读取文件并打开
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_files.png)
+<img src="img/artemis_files.png" /> </a>
 <hr>
 
 ### 读取 fasta 文件
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_loaded_seq.png)
+<img src="img/artemis_loaded_seq.png" /> </a>
 <hr>
 
 ### 读取 gff 文件
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_loaded_contigs.png)
+<img src="img/artemis_loaded_contigs.png" /> </a>
 <hr>
 
 ### 选择条件高亮CDS
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf0.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf1.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf2.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf3.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf4.png)
+<img src="img/artemis_orf0.png"/> </a>
+<img src="img/artemis_orf1.png"/> </a>
+<img src="img/artemis_orf2.png"/> </a>
+<img src="img/artemis_orf3.png"/> </a>
+<img src="img/artemis_orf4.png"/> </a>
 <hr>
 
 ### 查看感兴趣的基因
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf5.png)
-![avatar](https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis/img/artemis_orf6.png)
+<img src="img/artemis_orf5.png"/> </a>
+<img src="img/artemis_orf6.png"/> </a>
