@@ -53,3 +53,36 @@ tabix -p gff sorted.gff.gz
  ```
  ---
 # Tutorial
+<br>
+
+### 软件界面:
+![avatar](./artemis_splash.png)
+<hr>
+
+### 读取文件
+![avatar](./artemis_cdspred0.png)
+<hr>
+
+### 选择读取文件并打开
+![avatar](./artemis_files.png)
+<hr>
+
+### 读取 fasta 文件
+![avatar](./artemis_loaded_seq.png)
+<hr>
+
+### 读取 gff 文件
+![avatar](./artemis_loaded_contigs.png)
+<hr>
+
+### 选择条件高亮CDS
+![avatar](./artemis_orf0.png)
+![avatar](./artemis_orf1.png)
+![avatar](./artemis_orf2.png)
+![avatar](./artemis_orf3.png)
+![avatar](./artemis_orf4.png)
+<hr>
+
+### 查看感兴趣的基因
+![avatar](./artemis_orf5.png)
+![avatar](./artemis_orf6.png)
