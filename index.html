@@ -22382,16 +22382,6 @@
                         <li style="text-indent:2em"> 测序数据量：150（PE每条read150bp）x 2 x read数 = 数据量（每条lane120G） </li>
                         <li style="text-indent:2em"> 测序深度：数据量大小/参考基因组大小。一个基因大小为2M，深度10X，则总数据量为20M。 </li>
                         <li style="text-indent:2em"> 覆盖度：测序获得序列站基因组比例。如覆盖度为99%，则1%为unknown gap。</li>
-                        <li style="text-indent:2em"> 框架图：拼接得到的基因组覆盖度大于95%，基因区覆盖度达到98%以上，contig N50达到5Kb，scaffold N50达到20Kb，单碱基错误率在十万分之一以下。 </li>
-                        <li style="text-indent:2em"> 精细图: 拼接得到的基因组覆盖度大于98%，基因区覆盖度达到99%以上，contig N50达到20Kb，scaffold N50达到300Kb，单碱基错误率低于十万分之一，gap数不超过100个。 </li>
-                        <li style="text-indent:2em"> 完成图:是指经生物信息学分析后，拼接得到完整的基因组序列，单碱基错误率低于十万分之一。 </li>
-                        <li style="text-indent:2em"> 覆盖度：测序获得序列站基因组比例。如覆盖度为99%，则1%为unknown gap。</li>
-                        <li style="text-indent:2em"> Read：一次测序中仪器读取的核苷酸长度</li>
-                        <li style="text-indent:2em"> Contig：通过重叠部分将相邻reads组装形成的单元称为contig。 </li>
-                        <li style="text-indent:2em"> Scaffold：利用双端测序等其他方法的信息，定位contigs在染色体上的线性排列或相对位置关系，并连接起来形成较长的scaffold序列。 </li>
-                        <li style="text-indent:2em"> N50：把contig或scaffold从大到小排序，并对其长度进行累加，当累加长度达到基因组序列长度一半时，最后一个contig或scaffold长度。 </li>
-
-
 
                         <hr>
                         <h2><span class="header-section-number">1.3</span> 分析内容 </h2>
@@ -22537,10 +22527,100 @@ done
 
                 <h1><span class="header-section-number"></span> <strong>3. 组装 </strong> </h1>
                 <h2><span class="header-section-number">3.1</span> 全基因组调查 </h2>
+                <p style="text-indent:2em">一般来讲，对于较为复杂的基因组，我们通常会在基因组正式组装之前进行k-mer分析，以评估基因组杂合度、重复序列比例，并初步预估基因组大小，以及测序深度等，为后续基因组的正式组装提供参考信息。</p>
+                <a href="http://kmergenie.bx.psu.edu/" target="_blank">
+                    <p style="text-indent:2em"> KmerGenie网站</p>
+                </a>
+                <a href="/pipeline-14.PNG" target="_blank"><img src="/pipeline-14.PNG" target="_blank" alt="简要" /></a>
+                <p><pre class='shell'><code>tar -xzvf kmergenie-1.7051.tar.gz && cd kmergenie-1.7051 && chmod -R 755 *</code></pre></p>
+                <p><pre class='shell'><code> conda create -n python2 python=2.7 kmergenie </code></pre></p>
+                <p><pre class='shell'><code> python setup.py install</code></pre></p>
+                <p><pre class='shell'><code>一般使用时关注几个重要参数即可。
+--diploid为二倍体模式，默认不使用，即单倍体模式；
+-k，设定最大k-mer值，默认121，最大阈值121；
+-l，设定最小k-mer值，默认15，最小阈值15；
+-s，设定k-mer取值间隔，默认在最小值~最大值之间以10为一取值间隔；
+-t，程序运行线程数；-e，程序运行分配内存。
+</code></pre></p>
+
+                <p><pre class='shell'>mkdir result_haploid </code></pre></p>
+
+                <p><pre class='shell'>kmergenie fastq_list.txt -o ./result_haploid/haploid -l 15 -k 105 -s 10 -t 4 > haploid.log.txt 2> haploid.err.txt </code></pre></p>‘
+                <p style="text-indent:2em">那Kmer为什么是奇数？根本原因是为了避免在组装构建de Bruijn graph时正反义链混淆。</p>
+                <br>
+                <a href="/pipeline-15.PNG" target="_blank"><img src="/pipeline-15.PNG" target="_blank" alt="简要" /></a>
+                <a href="/pipeline-16.PNG" target="_blank"><img src="/pipeline-16.PNG" target="_blank" alt="简要" /></a>
                 <hr>
-                <h2><span class="header-section-number">3.2</span> 重头组装 </h2>
+                <h2><span class="header-section-number">3.2</span> 组装 </h2>
+                <p style="text-indent:2em">基因组组装(Genome assembly)是生物信息学领域的核心问题，基因组组装就是把序列测序产生的读取片段reads经过序列拼接组装，生成基因组的碱基序列。基因组组装软件可根据得到的所有读长组装成基因组。</p>
+                <p style="text-indent:2em">基因组组装这个步骤对于基因组分析是十分关键的，因为目前二代测序技术获得的测序序列一般都较短，需要组装拼接成较长的完整的序列用于进一步分析，例如长序列能提高物种注释分析的准确性。</p>
+                <p style="text-indent:2em">宏观来说，基因组组装可以分为从头组装(De novo assembly) 和映射比对组装(mapping assembly), 从头组装是指不需要依靠任何已知的基因组信息，反过来，映射比对组装就是需要把测序序列和参考基因组来比对，找到序列的对应位置再进行组装</p>
+                <p style="text-indent:2em">目前基因组组装一般有基于OLC(Overlap-Layout-Consensus, 先重叠后扩展)和基于De Brujin Graph(DBG)两种组装算法，基于OLC的组装方法适合长序列组装，运行依赖的数据结构需要消耗大量的内存，且运行速度比较慢，错误率高，而DBG组装方法内存消耗相对较低，运算速度快，且准确率高。目前主流的基因组装算法都是基于后者改进设计的。</p>
+                <a href="/pipeline-18.PNG" target="_blank"><img src="/pipeline-18.PNG" target="_blank" alt="简要" /></a>
+                <br>
+                <li style="text-indent:2em"> 框架图：拼接得到的基因组覆盖度大于95%，基因区覆盖度达到98%以上，contig N50达到5Kb，scaffold N50达到20Kb，单碱基错误率在十万分之一以下。 </li>
+                <li style="text-indent:2em"> 精细图: 拼接得到的基因组覆盖度大于98%，基因区覆盖度达到99%以上，contig N50达到20Kb，scaffold N50达到300Kb，单碱基错误率低于十万分之一，gap数不超过100个。 </li>
+                <li style="text-indent:2em"> 完成图:是指经生物信息学分析后，拼接得到完整的基因组序列，单碱基错误率低于十万分之一。 </li>
+                <li style="text-indent:2em"> 覆盖度：测序获得序列站基因组比例。如覆盖度为99%，则1%为unknown gap。</li>
+                <a href="/pipeline-17.PNG" target="_blank"><img src="/pipeline-17.PNG" target="_blank" alt="简要" /></a>
+                <li style="text-indent:2em"> Read：一次测序中仪器读取的核苷酸长度</li>
+                <li style="text-indent:2em"> Contig：通过重叠部分将相邻reads组装形成的单元称为contig。 </li>
+                <li style="text-indent:2em"> Scaffold：利用双端测序等其他方法的信息，定位contigs在染色体上的线性排列或相对位置关系，并连接起来形成较长的scaffold序列。 </li>
+                <li style="text-indent:2em"> N50：把contig或scaffold从大到小排序，并对其长度进行累加，当累加长度达到基因组序列长度一半时，最后一个contig或scaffold长度。 </li>
+                <h3><span class="header-section-number"></span> <strong>de novo assembly</strong> </h3>
+                <p style="text-indent:2em">SPAdes序列拼接软件是序列拼接软件中的后起之秀，拼接效果很不错，目前很多拼接软件已经都不在更新了，而spades却持续进行更新。并且SPAdes是一款非常好用的软件，而且该软件不仅支持illumina测序数据，而且还可以用于Ion Torrent测序数据，PacBio测序数据、sanger数据，Nanopore。 并且可以加入其它序列拼接结果，作为辅助。使用简单，非常适合用于混合组装来改善拼接效果。软件使用起来也并不难。因为之前对于Ion Torrent测序数据并没有官网软件，这里经过测试，发现SPAdes非常适合Ion
+                    Torrent数据的拼接。而且，SPAdes还可以用于二倍体杂合基因组的拼接。
+                </p>
+                <a href="http://cab.spbu.ru/software/spades/" target="_blank">
+                    <p style="text-indent:2em"> Spades 网站</p>
+                </a>
+                <a href="/pipeline-19.PNG" target="_blank"><img src="/pipeline-19.PNG" target="_blank" alt="简要" /></a>
+                <p><pre class='shell'><code>
+conda install -c bioconda spades
+                </code></pre></p>
+                <p><pre class='shell'><code>
+spades.py -k 21,33,55,77 --careful \
+--pe1-1 ../share/spades/test_dataset/ecoli_1K_1.fq.gz \
+--pe1-2 ../share/spades/test_dataset/ecoli_1K_2.fq.gz -o spades_test
+</code></pre></p>
+
+                <p><pre class='shell'><code>
+spades.py -k 21,33,55,77 --careful \
+--pe1-1 ../share/spades/test_dataset/ecoli_1K_1.fq.gz \
+--pe1-2 ../share/spades/test_dataset/ecoli_1K_2.fq.gz \
+--pacbio ecoli_subreads.fa -o spades_test
+</code></pre></p>
+
+                <br>
+                <h3><span class="header-section-number"></span> <strong>mapping assembly</strong> </h3>
+
+                <p><pre class='shell'><code>
+wget http://sourceforge.net/projects/abacas/files/abacas.1.3.1.pl
+chmod 755 abacas.1.3.1.pl
+mv abacas.1.3.1.pl ~/bin/
+ln -s ~/bin/abacas.1.3.1.pl ~/bin/abacas.pl
+perl -p -i -e 's#/usr/local/bin/perl#/usr/bin/perl#' ~/bin/abacas.1.3.1.pl
+</code></pre></p>
+                <p><pre class='shell'><code>
+abacas.pl -r ref.fasta -q query.fasta -p nucmer -o out_prefix
+</code></pre></p>
+
                 <hr>
                 <h2><span class="header-section-number">3.3</span> 组装结果评估 </h2>
+                <p><pre class='shell'><code>
+conda install busco quast 
+                </code></pre></p>
+                <p><pre class='shell'><code>
+#数据库下载
+wget https://busco-data.ezlab.org/v4/data/lineages/
+                </code></pre></p>
+                <p><pre class='shell'><code>
+run_BUSCO.py -i [组装的文件.fasta]  -l  [数据库文件夹] -o [输出文件名] -m [评估模式] -c [CPU数] [-offline 不下在线载数据库]
+                </code></pre></p>
+                <p><pre class='shell'><code>
+quast.py -t 10 -o test1_out contigs.fasta
+                </code></pre></p>
+
                 <hr>
 
                 <h1><span class="header-section-number"></span> <strong>4. 注释 </strong> </h1>
