@@ -22321,15 +22321,15 @@
 
             <div class="toc-content col-xs-12 col-sm-8 col-md-9">
                 <div class="fluid-row" id="header">
-                    <h1 class="title toc-ignore">基因组与比较基因组可视化绘图基础</h1>
+                    <h1 class="title toc-ignore" style="color:#337AB7">基因组与比较基因组</h1>
                     <p class="author-name">Feng jiarong<span class="affil-mark"> 1</span></p>
                     <p class="author-affiliation"><span class="affil-mark"></span><i></i></p>
-                    <h4 class="date"><i>BGI Genomics Co Ltd, ShenZhen, 2021.03.24</i></h4>
+                    <h4 class="date"><i>BGI Genomics Co Ltd, ShenZhen, 2021.08.27</i></h4>
                     <hr>
                     <p style="text-indent:2em">
-                        近年来高通量测序技术的蓬勃发展,使得微生物基因组学与比较基因组学得到了长足的发展。随着全球越来越多的基因组序列被研究者公布，细菌基因组分析与比较基因组分析技术在当下研究中日趋重要， 其中基因组的可视化在分析数据过程起着关键作用，一方面成功的 可视化基因组分析结果能帮助研究者得到和挖掘出有价值的内容，另一方面在文章发表时，一张好的图可谓一图胜千言
+                        近年来高通量测序技术的蓬勃发展,使得微生物基因组学与比较基因组学得到了长足的发展。随着全球越来越多的基因组序列被研究者公布，细菌基因组分析与比较基因组分析技术在当下研究中日趋重要。
                     </p>
-                    <p style="text-indent:2em">感谢大家来到本次 <i>细菌基因组可视化绘图技能</i> 分享课堂，本次课堂意在分享经验以及加速各位老师们在基因组数据数据与挖掘时的可视化需要的技能学习。那么在接下来的一段时间，我会先介绍基因组及比较基因组分析中常见的可视化方法,然后挑取 几个重要的软件进行实操。
+                    <p style="text-indent:2em">感谢大家来到本次 <i>基因组与比较基因组分析方法</i> 分享课堂，本次课堂意在分享经验以及加速各位老师们在基因组数据数据与挖掘时的可视化需要的技能学习。那么在接下来的一段时间，我会先介绍基因组及比较基因组分析中常见的可视化方法,然后挑取 几个重要的软件进行实操。
                     </p>
                     <p style="text-indent:2em">首先，我们需要下载一些软件和数据： </p>
                     <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop" target="_blank">
@@ -22340,438 +22340,651 @@
 
 
                 <div id="introduction" class="section level1">
-                    <br>
-                    <h1><span class="header-section-number"></span> <strong>概论</strong></h1>
+                    <h1><span class="header-section-number"></span> <strong>1. 概论 </strong></h1>
+
+                    <h2><span class="header-section-number">1.1</span> 分析流程总览 </h2>
                     <p>
-                        <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/blob/master/2021_03_lecture_slides_01.pdf" target="_blank"> <strong>内容总览</strong></a>
+                        通过采集样品，核酸提取，建库测序得到下机数据：
+                        <img src="/pipeline-01.PNG" target="_blank" alt="简要" />
+                        <br><br><br><br> 基因组分析根据研究目的，大致能概括成两条分析路线：
+                        <img src="/pipeline-02.PNG" target="_blank" alt="简要" />
+                        <br><br><br><br> WGS：
+                        <img src="/pipeline-03.PNG" target="_blank" alt="简要" />
+                        <br><br><br><br> <i>de novo</i>：
+                        <img src="/pipeline-04.PNG" alt="简要" />
                     </p>
+
                     <h4>
-                        <p>① 基因组怎么分析?</p>
+
+
+                        <hr>
+
+                        <h2><span class="header-section-number">1.2</span> 建库测序原理简介 </h2>
+                        <br>
+                        <a href="/nrg.2016.49.pdf" target="_blank">
+                            <p><i>Coming of age: ten years of nextgeneration sequencing technologies</i></p>
+                        </a>
+                        <p style="text-indent:2em"> <strong>一代测序/Sanger测序</strong>：链终止法，带荧光标记的双脱氧核苷三磷酸 (ddNTP)打断延伸，通过不同长度断链末端荧光推测序列，600bp读长以下十分准确，常用于合适长度的克隆产物验证测序</p>
+                        <a href="/pipeline-07.PNG" target="_blank"><img src="/pipeline-07.PNG" target="_blank" alt="简要" /></a>
+                        </br>
+                        </br>
+                        <p style="text-indent:2em"> <strong>二代测序</strong>：二代开始为高通量测序，测序前通过初步扩增成单链簇或球以达到测序量要求，SOLiD/454/Ion Torrent均为油包水PCR后通过磁珠锚定； illumina桥式PCR通过flowcell锚定；DNBseq通过滚环扩充成纳米球后通过阵列化测序芯片锚定。常见读长为100/150bp.</p>
+
+                        <a href="/pipeline-08.PNG" target="_blank"><img src="/pipeline-08.PNG" target="_blank" alt="简要" /></a>
+                        <p>测序过程中需要反复添加原料与冲洗故模板始终要被锚定，边延伸边测序。 454在测序中每轮循环入一种碱基，若发生碱基配对就会释放放一个焦磷酸同时释放荧光信号；illumina通过延伸过程中参入荧光dNTP打断延伸，读取荧光信号后切除荧光基团开始下一轮；IonTorrent与illumina同样通过dNTP打断，但不同的是它通过磁珠固定在测序芯片的微孔上，每次循环读取一次PH电信号； DNBseq/SOLiD则均为连接法测序，通过循环连接复合探针并剪切简并区域，每次确定1~2位碱基，最后推算重叠图谱得出序列
+                        </p>
+
+                        <a href="/pipeline-05.PNG" target="_blank"><img src="/pipeline-05.PNG" target="_blank" alt="简要" /></a>
+                        <p style="text-indent:2em"> <strong>三代测序</strong>：单分子测序，测序过程无需进行PCR扩增, PacBio SMRT通过零模波导孔原理，通过激光照射每个特定直径的测序孔在延伸过程中的有dNTP脱落的荧光基团获得序列信息；Nanopore 则直接读取核酸分子通过蛋白纳米孔时的电流信号而获得序列信息</p>
+                        <a href="/pipeline-06.PNG" target="_blank"><img src="/pipeline-06.PNG" target="_blank" alt="简要" /></a>
+
+                        <p style="text-indent:0em"> <strong>其他：</strong><br> </p>
+                        <li style="text-indent:2em"> 测序数据量：150（PE每条read150bp）x 2 x read数 = 数据量（每条lane120G） </li>
+                        <li style="text-indent:2em"> 测序深度：数据量大小/参考基因组大小。一个基因大小为2M，深度10X，则总数据量为20M。 </li>
+                        <li style="text-indent:2em"> 覆盖度：测序获得序列站基因组比例。如覆盖度为99%，则1%为unknown gap。</li>
+                        <li style="text-indent:2em"> 框架图：拼接得到的基因组覆盖度大于95%，基因区覆盖度达到98%以上，contig N50达到5Kb，scaffold N50达到20Kb，单碱基错误率在十万分之一以下。 </li>
+                        <li style="text-indent:2em"> 精细图: 拼接得到的基因组覆盖度大于98%，基因区覆盖度达到99%以上，contig N50达到20Kb，scaffold N50达到300Kb，单碱基错误率低于十万分之一，gap数不超过100个。 </li>
+                        <li style="text-indent:2em"> 完成图:是指经生物信息学分析后，拼接得到完整的基因组序列，单碱基错误率低于十万分之一。 </li>
+                        <li style="text-indent:2em"> 覆盖度：测序获得序列站基因组比例。如覆盖度为99%，则1%为unknown gap。</li>
+                        <li style="text-indent:2em"> Read：一次测序中仪器读取的核苷酸长度</li>
+                        <li style="text-indent:2em"> Contig：通过重叠部分将相邻reads组装形成的单元称为contig。 </li>
+                        <li style="text-indent:2em"> Scaffold：利用双端测序等其他方法的信息，定位contigs在染色体上的线性排列或相对位置关系，并连接起来形成较长的scaffold序列。 </li>
+                        <li style="text-indent:2em"> N50：把contig或scaffold从大到小排序，并对其长度进行累加，当累加长度达到基因组序列长度一半时，最后一个contig或scaffold长度。 </li>
+
+
+
+                        <hr>
+                        <h2><span class="header-section-number">1.3</span> 分析内容 </h2>
                         <li style="text-indent:2em"><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Overview/01_WGS" target="_blank">WGS</a></li>
+                        <a href="/pipeline-09.PNG" target="_blank"><img src="/pipeline-09.PNG" target="_blank" alt="简要" /></a>
                         <br>
                         <li style="text-indent:2em">
                             <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Overview/02_Denovo" target="_blank"> <i>De novo</i></a>
                         </li>
+                        <a href="/pipeline-10.PNG" target="_blank"><img src="/pipeline-10.PNG" target="_blank" alt="简要" /></a>
                     </h4>
                     <h4>
-                        <p>② 可视化什么?</p>
-                        <li style="text-indent:2em"><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/blob/master/2021_03_lecture_slides_02.pdf" target="_blank">基因组结构与生物学注释</a></li>
+                        <p>分析什么</p>
+                        <li style="text-indent:2em"><a href="/2021_03_lecture_slides_02.pdf" target="_blank">基因组结构与生物学注释</a></li>
                     </h4>
                     <h4>
-                        <p>③ 比较什么?</p>
-                        <li style="text-indent:2em"><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/blob/master/2021_03_lecture_slides_03.pdf" target="_blank">结构关系</a></li>
+                        <p>比较什么?</p>
+                        <li style="text-indent:2em"><a href="/2021_03_lecture_slides_03.pdf" target="_blank">结构关系</a></li>
                         <br>
-                        <li style="text-indent:2em"><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/blob/master/2021_03_lecture_slides_04.pdf" target="_blank">进化关系</a></li>
+                        <li style="text-indent:2em"><a href="/2021_03_lecture_slides_04.pdf" target="_blank">进化关系</a></li>
                     </h4>
+
+                    <hr>
+
+                    <h2><span class="header-section-number">1.4</span> 分析环境 </h2>
+                    <p style="text-indent:2em"> Conda 是一个开源的软件包管理系统和环境管理系统，用于安装多个版本的软件包及其依赖关系，并在它们之间轻松切换。 Conda 是为 Python 程序创建的，适用于 Linux，OS X 和Windows，也可以打包和分发其他软件。</p>
+                    <p style="text-indent:2em"> 下载：</p>
+                    <p><pre class='shell'><code> wget -c https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</code></pre></p>
+                    <p><pre class='shell'><code> wget -c https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</code></pre></p>
+                    <p style="text-indent:2em"> 授权：</p>
+                    <p><pre class='shell'><code> chmod 777 Miniconda3-latest-Linux-x86_64.sh</code></pre></p>
+                    <p style="text-indent:2em"> 安装：</p>
+                    <p><pre class='shell'><code> bash Miniconda3-latest-Linux-x86_64.sh</code></pre></p>
+                    <p style="text-indent:2em"> 添加源：</p>
+
+                    <p><pre class='shell'><code> 
+conda config --add channels bioconda 
+conda config --add channels conda-forge 
+conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/cloud/bioconda/ 
+conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels bioconda 
+conda config --add channels conda-forge 
+conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/cloud/bioconda/ 
+conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/pkgs/free/ 
+conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/pkgs/r/
+                    </code></pre></p>
+                    <p><pre class='shell'><code> vim ~/.condarc </code></pre></p>
+
+                    <p style="text-indent:2em"> 安装：</p>
+                    <p><pre class='shell'><code> conda search gatk</code></pre></p>
+                    <p><pre class='shell'><code> which gatk</code></pre></p>
+                    <p><pre class='shell'><code> whereis gatk</code></pre></p>
+                    <p><pre class='shell'><code> conda install gatk=3.7 </code></pre></p>
+                    <p><pre class='shell'><code> conda update gatk </code></pre></p>
+                    <p><pre class='shell'><code> conda remove gatk </code></pre></p>
+                    <p><pre class='shell'><code> conda create -n gatk python=3 gatk=3.7</code></pre></p>
+
+
+                    <p style="text-indent:2em"> 激活与退出环境：</p>
+                    <p><pre class='shell'><code> conda activate</code></pre></p>
+                    <p><pre class='shell'><code> conda deactivate</code></pre></p>
+                    <p><pre class='shell'><code> conda remove -n gatk --all</code></pre></p>
+                    <hr>
+
                     <br>
                 </div>
                 <br>
                 </p>
-                <div id="basic-data-access-and-visualization" class="section level2">
-                    <h1><span class="header-section-number">1</span> Genomics</h1>
-                    <p style="text-indent:2em">
-                        基因组可视化，即对基因组数据进行可视化，通常指对最基本的基因组DNA序列，和注释数据等基因组相关的分析数据，按照一定的用户友好方式，使用图形元素表达出来，方便视角直观地识别已知或未知的数据模式，或者比较差异等。
-                    </p>
-                    <h3 style="text-indent:2em">快速入门：</h3>
-                    <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
-                    <ul>
-                        <li><a href="https://github.com/sanger-pathogens/Artemis" target="_blank"> Artemis</a></li>
-                        <li><a href="https://paulstothard.github.io/cgview/" target="_blank"> CGView</a></li>
-                        <li><a href="https://github.com/GMOD/Apollo" target="_blank"> Apollo</a></li>
-                        <li><a href="https://ncbiinsights.ncbi.nlm.nih.gov/tag/genome-workbench/" target="_blank"> NCBI Genome Workbench</a></li>
-                    </ul>
-                    <br>
-                    <hr>
+                <h1><span class="header-section-number"></span><strong>2. 质控 </strong></h1>
+                <h2><span class="header-section-number">2.1</span> 下机数据解读 </h2>
+                <p style="text-indent:2em"> Fastq格式是一种基于文本的存储生物序列和对应碱基（或氨基酸）质量的文件格式。最初由桑格研究所（ Wellcome Trust Sanger Institute ）开发出来，现已成为存储高通量测序数据的事实标准。以Illumina Casava 1.8+ 的fastq格式为例，fastq格式的形式如下：</p>
+                <a href="/pipeline-11.PNG" target="_blank"><img src="/pipeline-11.PNG" target="_blank" alt="简要" /></a>
 
-                    <h2> <span class="header-section-number">1.1</span>Artemis</h2>
-                    <p style="text-indent:2em">
-                        Artemis是由Sanger开发的基因组浏览和比较基因组分析的工具能够打开和编辑基因组文件。画基因组圈图，还能查看二代测序数据的Map结果。地址:
-                        <a href="https://github.com/sanger-pathogens/Artemis" target="_blank">
-                            <strong>https://github.com/sanger-pathogens/Artemis</strong></a>
-                    </p>
+                <li style="text-indent:2em"> 第一行：必须@开头，紧跟唯一的序列的ID标识符，后面可跟其他描述性内容，但序列ID与描述部分空格分开，这点很重要，是很多分析的基础 </li>
+                <li style="text-indent:2em"> 第二行：序列的顺序，基本不可能出现重复。这里是核酸。 </li>
+                <li style="text-indent:2em"> 第三行：必须+开头，后面可以跟描述信息，此处是跟了第一行的信息。但为了节约空间，很多时候这一行只有一个+,而不跟任何内容。 </li>
+                <li style="text-indent:2em"> 第四行：碱基或氨基酸（此处碱基）的质量字符，对应着第二行的碱基，反应的是该碱基的错误率，所以这一行的字符数和第二行要一一对应，数值间不容易分隔且浪费储存空间，这里就引入了ASCII code。 </li>
 
-                    <a href="./Part_1/artemis/img/artemis_orf4.png" target="_blank"> <img src="./Part_1/artemis/img/artemis_orf4.png" /> </a>
+                <p style="text-indent:2em"> <strong>碱基错误率与质量得分的关系如下：</strong></p>
+                <p><pre class='shell'><code> Qphred = -10log10p</code></pre></p>
+                <p style="text-indent:2em"> 质量值Q是测序错误率的对数*-10。假如错误率是0.01，则Q值为20。可见，错误率越低，其Q值越高。即Q值越高越可靠。</p>
+                <p style="text-indent:2em"> ASCII码的0-31位都是控制字符，没法打印和保存，能打印的从要从32位的Space开始，所以就可以给实际的Q值加上一个固定值, 根据这个固定值分成以下两种： Phred+64 质量字符的ASCII值 - 64 Phred+33: 质量字符的ASCII值 - 33 可以粗略分为 Phred+33和Phred+64，phred33，就是加了33，也就是10变成43，现在基本都33，而且很多质控软件也支持自动检测</p>
+                <p><pre class='shell'><code>
+less XXX.fq | head -n 1000 | awk '{if(NR%4==0) printf("%s",$0);}' \
+| od -A n -t u1 -v \
+| awk 'BEGIN{min=100;max=0;} \
+{for(i=1;i<=NF;i++) {if($i>max) max=$i; if($i<min) min=$i;}}END \
+{if(max<=126 && min<59) print "Phred33"; \
+else if(max>73 && min>=64) print "Phred64"; \
+else if(min>=59 && min<64 && max>73) print "Solexa64"; \
+else print "Unknown score encoding";</code></pre></p>
 
-                    <a href="https://sanger-pathogens.github.io/Artemis/Artemis/artemis-manual.html" target="_blank">
-                        <p style="text-indent:2em"><strong>官方文档</strong></p>
-                    </a>
+                <li style="text-indent:2em"> 1. 如果有2个以上的质量字符ASCII值小于等于58(即有两个碱基的得分小于等于25），同时没有任何质量字符的ASCII值大于等于75，即判断是Phred+33。</li>
+                <li style="text-indent:2em"> 2. 如果有2个以上的质量字符ASCII值大于等于75(即有两个碱基的得分大于等于10），同时没有任何质量字符的ASCII值小于等于58，即判断是Phred+64。</li>
+                <li style="text-indent:2em"> 3. 如果所有质量字符的ASCII值介于59到74之间，即判断可能是Phred+33，但建议使用更多的序列做进一步测试（出现这种结果可能有两种情况：1, Phred+33编码，所有碱基质量得分介于26到42之间；2，Phred+64编码，所有碱基质量得分介于-5到10；是前者的可能性大）。</li>
+                <li style="text-indent:2em"> 4. 如果出现上述3种以外的情况，建议打印出质量字符的ASCII值人工判断。</li>
 
-                    <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis" target="_blank">
-                        <p style="text-indent:2em"><strong>教程</strong></p>
-                    </a>
-                    <hr>
-                    <br>
+                <hr>
 
-                    <h2> <span class="header-section-number">1.2</span>CGView</h2>
-                    <p style="text-indent:2em">
-                        CGView是一种画图工具，生成展示序列特性、基本组成片段、分析相似片段的圆形基因图解图，需要提供的序列为raw、FASTA、GenBank和EMBL格式， 另增加特性或者分析信息请在提交的GFF文件中添加相关信息。此服务使用blast比对相似序列从而建立三组比较基因组或者基因组序列套件。 blast比对结果和特性信息转换到展示整个序列或者扩展更多细节的趣味片段区域的基因图解图中。 特性的展示和怎么来绘制可以通过一些选项来控制。该服务显示与细菌、质粒、叶绿体、线粒体基因组有关的特性，帮助鉴定基因组储存段、举证基因水平转运和找出基因复制数量不同的图谱。由于收集的序列可被也在比较基因组，图谱可被用在读取新获取的序列被已知基因组覆盖的可视区域
-                        。官方也提供了在线服务的网站地址:
-                        <a href="https://paulstothard.github.io/cgview/" target="_blank">
-                            <strong>https://paulstothard.github.io/cgview/</strong></a>
-                    </p>
-                    <p style="text-indent:2em"><strong>输入文件：</strong></p>
+                <h2><span class="header-section-number">2.2</span> 下机数据质控 </h2>
+                <p> <strong>fastp：</strong></p>
+                <p style="text-indent:2em"> fastp是用于处理fastq文件，基于C++，支持多线程，整合了fastQC和Trimmomatic的一些功能</p>
+                <li style="text-indent:2em">去接头</li>
+                <li style="text-indent:2em">碱基矫正</li>
+                <li style="text-indent:2em">滑动窗口质量值剪切</li>
+                <li style="text-indent:2em">切ployG/ployX尾巴</li>
+                <li style="text-indent:2em">处理分子标签(UMI)</li>
+                <li style="text-indent:2em">分割输出结果</li>
+                <li style="text-indent:2em">duplicate率的评估</li>
+                <li style="text-indent:2em">过表达序列分析</li>
+                <li style="text-indent:2em">质控结果报告</li>
+                <br>
+                <a href="/pipeline-12.PNG" target="_blank"><img src="/pipeline-12.PNG" target="_blank" alt="简要" /></a>
+                <a href="/pipeline-13.PNG" target="_blank"><img src="/pipeline-13.PNG" target="_blank" alt="简要" /></a>
 
-                    <ul>
-                        <li>基因组文件：为细菌的基因组序列（fasta格式，或者gbk格式）</li>
-                        <li>标记基因文件：</li>
-                    </ul>
-                    <table border="2" style="BORDER-COLLAPSE: collapse">
-                        <tr>
-                            <th>seqname</th>
-                            <th>source</th>
-                            <th>feature start</th>
-                            <th>end score</th>
-                            <th>strand</th>
-                            <th>frame</th>
-                        </tr>
-                        <tr>
-                            <th>基因名字</th>
-                            <th>基因类别</th>
-                            <th>起始位置</th>
-                            <th>终止位置</th>
-                            <th>正负连</th>
-                            <th>NA</th>
-                        </tr>
-                    </table>
-                    <ul>
-                        <li>blast结果文件(m8即可)</li>
-                    </ul>
+                <p><pre class='shell'><code> conda install -c bioconda fastp -y</code></pre></p>
+                <p style="text-indent:2em">单端测序single end(SE)</p>
+                <p><pre class='shell'><code>fastp -i in.fq -o out.fq -w 8 --html out.html --json out.json </code></pre></p>
+                <p style="text-indent:2em">双端测序paired end(PE)</p>
+                <p><pre class='shell'><code>fastp -i in.R1.fq.gz -I in.R2.fq.gz -o our.R1.fq.gz -O  out.R2.fq.gz -w 8 --html out.html --json out.json </code></pre></p>
+                <p><pre class='shell'><code>
+#!/bin/bash
+for i in 71 72 75 76 78 79;do
+  {
+  fastp -i ~/RNAseq/SRR190242${i}_1.fastq.gz -o SRR190242${i}_1.fastq.gz -I  ~/RNAseq/SRR190242${i}_2.fastq.gz -O SRR190242${i}_2.fastq.gz -w 8 --html ${i}.html --json ${i}.json
+  } 
+done
+</code></pre></p>
+                <p><pre class='shell'><code> conda install -c bioconda fastqc -y</code></pre></p>
+                <p><pre class='shell'><code>ls *.gz|while read id;do  fastqc multiqc -t 4 $id;done</code></pre></p>
+                <p><pre class='shell'><code>multiqc -n in_dir ./</code></pre></p>
 
-                    <a href="./Part_1/CGVIEW.jpg" target="_blank"> <img src="./Part_1/CGVIEW.jpg" /> </a>
-                    <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/GCView" target="_blank">
-                        <p style="text-indent:2em"><strong>教程</strong></p>
-                    </a>
-
-                    <hr>
-                    <br>
-
-                    <h2> <span class="header-section-number">1.3</span>Circos</h2>
-                    <p style="text-indent:2em">
-                        Circos是一个用于可视化数据和信息的软件包。它以圆形布局可视化数据-这使得Circos非常适合探索对象或位置之间的关系
-                        <a href="http://www.circos.ca/" target="_blank">
-                            <strong>http://www.circos.ca/</strong></a>
-                    </p>
-                    <a href="./Part_1/Circos.PNG" target="_blank"> <img src="./Part_1/Circos.PNG" /> </a>
-                    <a href="./Part_1/Circos/Circos配置文件.pdf" target="_blank">
-                        <p style="text-indent:2em"><strong>配置文件说明</strong></p>
-                    </a>
-
-                    <a href="./Part_1/Circos/Circos-中文教程.pdf" target="_blank">
-                        <p style="text-indent:2em"><strong>教程</strong></p>
-                    </a>
-
-                    <hr>
-                    <br>
+                <p>FastQC</p>
+                <p style="text-indent:2em"> QC 报告怎么解读？</p>
+                <a href="https://www.jianshu.com/p/dc6820eb342e?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation" target="_blank">
+                    <p style="text-indent:2em"> 点击链接</p>
+                </a>
 
 
-                </div>
-                <div id="basic-data-access-and-visualization" class="section level2">
-                    <h1><span class="header-section-number">2</span> Comparative Genomics</h1>
-                    <p style="text-indent:2em">比较基因组学(Comparative Genomics)是基于基因组图谱和测序基础上，对已知的基因和基因组结构进行比较，来了解基因的功能、表达机理和物种进化的学科。利用模式生物基因组与人类基因组之间编码顺序上和结构上的同源性，克隆人类疾病基因，揭示基因功能和疾病分子机制， 阐明物种进化关系，及基因组的内在结构。
-                    </p>
-                    <h3 style="text-indent:2em">快速入门：</h3>
-                    <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
-                    <ul>
-                        <li><a href="https://github.com/sanger-pathogens/Artemis" target="_blank"> Artemis Comparison Tool (ACT)</a></li>
-                        <li><a href="http://www.darlinglab.org/mauve/mauve.html" target="_blank"> Mauve</a></li>
-                    </ul>
-                    <br>
+                <hr>
 
-                    <h2> <span class="header-section-number">2.1</span>ACT</h2>
-                    <p style="text-indent:2em">
-                        Artemis Comparison Tool (ACT) 是一个显示两个或多个DNA序列之间成对比较的工具。它可以用于识别和分析基因组之间的相似和差异区域，并在整个序列及其注释的背景下探索同线性的保守性。
-                    </p>
+                <h1><span class="header-section-number"></span> <strong>3. 组装 </strong> </h1>
+                <h2><span class="header-section-number">3.1</span> 全基因组调查 </h2>
+                <hr>
+                <h2><span class="header-section-number">3.2</span> 重头组装 </h2>
+                <hr>
+                <h2><span class="header-section-number">3.3</span> 组装结果评估 </h2>
+                <hr>
 
-                    <a href="./Part_1/ACT.png" target="_blank"> <img src="./Part_1/ACT.png" /> </a>
-                    <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/ACT" target="_blank">
-                        <p style="text-indent:2em"><strong>教程</strong></p>
-                    </a>
-                    <hr>
-                    <br>
+                <h1><span class="header-section-number"></span> <strong>4. 注释 </strong> </h1>
+                <h2><span class="header-section-number">4.1</span> 基因注释 </h2>
+                <hr>
+                <h2><span class="header-section-number">4.2</span> 功能注释 </h2>
+                <hr>
+                <h2><span class="header-section-number">4.3</span> 物种注释 </h2>
+                <hr>
 
-                    <h2> <span class="header-section-number">2.2</span>Mummer</h2>
-                    <p style="text-indent:2em">
-                        MUMmer 是一个快速比对软件，适用于多个基因组完成图或是草图间的比对。
-                        <a href="http://mummer.sourceforge.net/" target="_blank">
-                            <strong>http://mummer.sourceforge.net/</strong></a>
-                    </p>
-                    <a href="./Part_1/Mummer.gif" target="_blank"> <img src="./Part_1/Mummer.gif" /> </a>
-                    <a href="http://mummer.sourceforge.net/manual/" target="_blank">
-                        <p style="text-indent:2em"><strong>教程</strong></p>
-                    </a>
-                    <hr>
-                    <br>
+                <h1><span class="header-section-number"></span> <strong>5. 比对 </strong> </h1>
+                <h2><span class="header-section-number">5.1</span> 全基因组比对 </h2>
+                <hr>
+                <h2><span class="header-section-number">5.2</span> 分析突变 </h2>
+                <hr>
+
+                <h1><span class="header-section-number"></span> <strong>6. 进化 </strong> </h1>
+                <h2><span class="header-section-number">6.1</span> 基因组进化树 </h2>
+                <hr>
+                <h2><span class="header-section-number">6.2</span> SNP进化树 </h2>
+                <hr>
+                <h2><span class="header-section-number">6.3</span> Core-Pan </h2>
+                <hr>
+
+                <h1><span class="header-section-number"></span> <strong>7. 可视化专题 </strong> </h1>
+                <h2><span class="header-section-number">7.1</span> 基因组图谱可视化 </h2>
+                <hr>
+
+                <h2><span class="header-section-number">7.2</span> SNP进化树 </h2>
+                <hr>
+
+                <h1><span class="header-section-number"></span> <strong>8. 公共数据库专题 </strong> </h1>
+                <h2><span class="header-section-number">8.1</span> 序列数据库 </h2>
+                <hr>
+                <h2><span class="header-section-number">8.2</span> 功能注释数据库 </h2>
+                <hr>
+                <h2><span class="header-section-number">8.3</span> 物种注释数据库 </h2>
+                <hr>
+
+                <h3> <span class="header-section-number">1.1</span>Genome</h3>
+                <p style="text-indent:2em">
+                    基因组可视化，即对基因组数据进行可视化，通常指对最基本的基因组DNA序列，和注释数据等基因组相关的分析数据，按照一定的用户友好方式，使用图形元素表达出来，方便视角直观地识别已知或未知的数据模式，或者比较差异等。
+                </p>
+                <h3 style="text-indent:2em">快速入门：</h3>
+                <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
+                <ul>
+                    <li><a href="https://github.com/sanger-pathogens/Artemis" target="_blank"> Artemis</a></li>
+                    <li><a href="https://paulstothard.github.io/cgview/" target="_blank"> CGView</a></li>
+                    <li><a href="https://github.com/GMOD/Apollo" target="_blank"> Apollo</a></li>
+                    <li><a href="https://ncbiinsights.ncbi.nlm.nih.gov/tag/genome-workbench/" target="_blank"> NCBI Genome Workbench</a></li>
+                </ul>
+                <br>
+                <hr>
+
+                <h2> <span class="header-section-number">1.1</span>Artemis</h2>
+                <p style="text-indent:2em">
+                    Artemis是由Sanger开发的基因组浏览和比较基因组分析的工具能够打开和编辑基因组文件。画基因组圈图，还能查看二代测序数据的Map结果。地址:
+                    <a href="https://github.com/sanger-pathogens/Artemis" target="_blank">
+                        <strong>https://github.com/sanger-pathogens/Artemis</strong></a>
+                </p>
+
+                <a href="./Part_1/artemis/img/artemis_orf4.png" target="_blank"> <img src="./Part_1/artemis/img/artemis_orf4.png" /> </a>
+
+                <a href="https://sanger-pathogens.github.io/Artemis/Artemis/artemis-manual.html" target="_blank">
+                    <p style="text-indent:2em"><strong>官方文档</strong></p>
+                </a>
+
+                <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/artemis" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+                <h2> <span class="header-section-number">1.2</span>CGView</h2>
+                <p style="text-indent:2em">
+                    CGView是一种画图工具，生成展示序列特性、基本组成片段、分析相似片段的圆形基因图解图，需要提供的序列为raw、FASTA、GenBank和EMBL格式， 另增加特性或者分析信息请在提交的GFF文件中添加相关信息。此服务使用blast比对相似序列从而建立三组比较基因组或者基因组序列套件。 blast比对结果和特性信息转换到展示整个序列或者扩展更多细节的趣味片段区域的基因图解图中。 特性的展示和怎么来绘制可以通过一些选项来控制。该服务显示与细菌、质粒、叶绿体、线粒体基因组有关的特性，帮助鉴定基因组储存段、举证基因水平转运和找出基因复制数量不同的图谱。由于收集的序列可被也在比较基因组，图谱可被用在读取新获取的序列被已知基因组覆盖的可视区域
+                    。官方也提供了在线服务的网站地址:
+                    <a href="https://paulstothard.github.io/cgview/" target="_blank">
+                        <strong>https://paulstothard.github.io/cgview/</strong></a>
+                </p>
+                <p style="text-indent:2em"><strong>输入文件：</strong></p>
+
+                <ul>
+                    <li>基因组文件：为细菌的基因组序列（fasta格式，或者gbk格式）</li>
+                    <li>标记基因文件：</li>
+                </ul>
+                <table border="2" style="BORDER-COLLAPSE: collapse">
+                    <tr>
+                        <th>seqname</th>
+                        <th>source</th>
+                        <th>feature start</th>
+                        <th>end score</th>
+                        <th>strand</th>
+                        <th>frame</th>
+                    </tr>
+                    <tr>
+                        <th>基因名字</th>
+                        <th>基因类别</th>
+                        <th>起始位置</th>
+                        <th>终止位置</th>
+                        <th>正负连</th>
+                        <th>NA</th>
+                    </tr>
+                </table>
+                <ul>
+                    <li>blast结果文件(m8即可)</li>
+                </ul>
+
+                <a href="./Part_1/CGVIEW.jpg" target="_blank"> <img src="./Part_1/CGVIEW.jpg" /> </a>
+                <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/GCView" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+
+                <hr>
+                <br>
+
+                <h2> <span class="header-section-number">1.3</span>Circos</h2>
+                <p style="text-indent:2em">
+                    Circos是一个用于可视化数据和信息的软件包。它以圆形布局可视化数据-这使得Circos非常适合探索对象或位置之间的关系
+                    <a href="http://www.circos.ca/" target="_blank">
+                        <strong>http://www.circos.ca/</strong></a>
+                </p>
+                <a href="./Part_1/Circos.PNG" target="_blank"> <img src="./Part_1/Circos.PNG" /> </a>
+                <a href="./Part_1/Circos/Circos配置文件.pdf" target="_blank">
+                    <p style="text-indent:2em"><strong>配置文件说明</strong></p>
+                </a>
+
+                <a href="./Part_1/Circos/Circos-中文教程.pdf" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+
+                <hr>
+                <br>
 
 
-                    <h2> <span class="header-section-number">2.3</span>MCscan</h2>
-                    <p style="text-indent:2em">
-                        MUMmer 是一个快速比对软件，适用于多个基因组完成图或是草图间的比对。
-                        <a href="http://mummer.sourceforge.net/" target="_blank">
-                            <strong>http://mummer.sourceforge.net/</strong></a>
-                    </p>
-                    <a href="./Part_1/MScan.PNG" target="_blank"> <img src="./Part_1/MScan.PNG" /> </a>
-                    <a href="https://github.com/tanghaibao/jcvi/wiki/MCscan-(Python-version)" target="_blank">
-                        <p style="text-indent:2em"><strong>教程</strong></p>
-                    </a>
-                    <hr>
-                    <br>
+            </div>
+            <div id="basic-data-access-and-visualization" class="section level2">
+                <h1><span class="header-section-number">2</span> Comparative Genomics</h1>
+                <p style="text-indent:2em">比较基因组学(Comparative Genomics)是基于基因组图谱和测序基础上，对已知的基因和基因组结构进行比较，来了解基因的功能、表达机理和物种进化的学科。利用模式生物基因组与人类基因组之间编码顺序上和结构上的同源性，克隆人类疾病基因，揭示基因功能和疾病分子机制， 阐明物种进化关系，及基因组的内在结构。
+                </p>
+                <h3 style="text-indent:2em">快速入门：</h3>
+                <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
+                <ul>
+                    <li><a href="https://github.com/sanger-pathogens/Artemis" target="_blank"> Artemis Comparison Tool (ACT)</a></li>
+                    <li><a href="http://www.darlinglab.org/mauve/mauve.html" target="_blank"> Mauve</a></li>
+                </ul>
+                <br>
+
+                <h2> <span class="header-section-number">2.1</span>ACT</h2>
+                <p style="text-indent:2em">
+                    Artemis Comparison Tool (ACT) 是一个显示两个或多个DNA序列之间成对比较的工具。它可以用于识别和分析基因组之间的相似和差异区域，并在整个序列及其注释的背景下探索同线性的保守性。
+                </p>
+
+                <a href="./Part_1/ACT.png" target="_blank"> <img src="./Part_1/ACT.png" /> </a>
+                <a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Part_1/ACT" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+                <h2> <span class="header-section-number">2.2</span>Mummer</h2>
+                <p style="text-indent:2em">
+                    MUMmer 是一个快速比对软件，适用于多个基因组完成图或是草图间的比对。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/Mummer.gif" target="_blank"> <img src="./Part_1/Mummer.gif" /> </a>
+                <a href="http://mummer.sourceforge.net/manual/" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+
+                <h2> <span class="header-section-number">2.3</span>MCscan</h2>
+                <p style="text-indent:2em">
+                    MUMmer 是一个快速比对软件，适用于多个基因组完成图或是草图间的比对。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/MScan.PNG" target="_blank"> <img src="./Part_1/MScan.PNG" /> </a>
+                <a href="https://github.com/tanghaibao/jcvi/wiki/MCscan-(Python-version)" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
 
 
 
-                    <h2> <span class="header-section-number">2.4</span>BRIG</h2>
-                    <p style="text-indent:2em">
-                        MUMmer 是一个快速比对软件，适用于多个基因组完成图或是草图间的比对。
-                        <a href="http://mummer.sourceforge.net/" target="_blank">
-                            <strong>http://mummer.sourceforge.net/</strong></a>
-                    </p>
-                    <a href="./Part_1/Brig.jpg" target="_blank"> <img src="./Part_1/Brig.jpg" /> </a>
-                    <a href="https://www.plob.org/article/12704.html" target="_blank">
-                        <p style="text-indent:2em"><strong>教程</strong></p>
-                    </a>
-                    <hr>
-                    <br>
+                <h2> <span class="header-section-number">2.4</span>BRIG</h2>
+                <p style="text-indent:2em">
+                    MUMmer 是一个快速比对软件，适用于多个基因组完成图或是草图间的比对。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/Brig.jpg" target="_blank"> <img src="./Part_1/Brig.jpg" /> </a>
+                <a href="https://www.plob.org/article/12704.html" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
 
-                    <h2> <span class="header-section-number">2.5</span>genoPlotR</h2>
-                    <p style="text-indent:2em">
-                        genoPlotR是一个R软件包，用于生成出版物级的基因和基因组图谱.
-                        <a href="http://mummer.sourceforge.net/" target="_blank">
-                            <strong>http://mummer.sourceforge.net/</strong></a>
-                    </p>
-                    <a href="./Part_1/genPlotR.png" target="_blank"> <img src="./Part_1/genPlotR.png" /> </a>
-                    <a href="https://www.jianshu.com/p/acc378109170?utm_campaign=hugo" target="_blank">
-                        <p style="text-indent:2em"><strong>教程</strong></p>
-                    </a>
-                    <hr>
-                    <br>
-                </div>
-
-
-                    <div id="introduction" class="section level1">
-                        <h1><span class="header-section-number">3</span> Orthologues<i> </i></h1>
-
-                        <h3 style="text-indent:2em">快速入门：</h3>
-                        <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
-                        <ul>
-                            <li><a href="https://orthovenn2.bioinfotoolkits.net./home" target="_blank"> Orthovenn2</a></li>
-                            <li><a href="http://pangenome.de/" target="_blank"> panX</a></li>
-                        </ul>
-                        <br>
+                <h2> <span class="header-section-number">2.5</span>genoPlotR</h2>
+                <p style="text-indent:2em">
+                    genoPlotR是一个R软件包，用于生成出版物级的基因和基因组图谱.
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/genPlotR.png" target="_blank"> <img src="./Part_1/genPlotR.png" /> </a>
+                <a href="https://www.jianshu.com/p/acc378109170?utm_campaign=hugo" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+            </div>
 
 
-                        <h2> <span class="header-section-number">3.1</span>OrthoFinder2</h2>
-                        <p style="text-indent:2em">
-                            OrthoFinder是比较基因组学中的实用的，运行快速，准确的全面的工具。它的主要功能是，找到了正交群和直系同源物，推断出所有正交群的根基因树，并识别那些基因树中的所有基因重复事件。它还为所分析的物种推断出有根的物种树，并将基因重复事件从基因树比对到物种树的分支中。
-                            <a href="http://mummer.sourceforge.net/" target="_blank">
-                                <strong>http://mummer.sourceforge.net/</strong></a>
+            <div id="introduction" class="section level1">
+                <h1><span class="header-section-number">3</span> Orthologues<i> </i></h1>
+
+                <h3 style="text-indent:2em">快速入门：</h3>
+                <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
+                <ul>
+                    <li><a href="https://orthovenn2.bioinfotoolkits.net./home" target="_blank"> Orthovenn2</a></li>
+                    <li><a href="http://pangenome.de/" target="_blank"> panX</a></li>
+                </ul>
+                <br>
+
+
+                <h2> <span class="header-section-number">3.1</span>OrthoFinder2</h2>
+                <p style="text-indent:2em">
+                    OrthoFinder是比较基因组学中的实用的，运行快速，准确的全面的工具。它的主要功能是，找到了正交群和直系同源物，推断出所有正交群的根基因树，并识别那些基因树中的所有基因重复事件。它还为所分析的物种推断出有根的物种树，并将基因重复事件从基因树比对到物种树的分支中。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/Orthofinder.PNG" target="_blank"> <img src="./Part_1/Orthofinder.PNG" /> </a>
+                <a href="https://www.jianshu.com/p/4d29d24883d2" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+
+                <h2> <span class="header-section-number">3.2</span>Roary</h2>
+                <p style="text-indent:2em">
+                    Roary是一款由The Wellcome Trust SangerInstitute主导开发的，可以快速地对大规模原核生物基因组进行泛基因组分析的软件。其优点在于可以在短时间内对数千规模的微生物基因组进行泛基因组分析。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/Roary.png" target="_blank"> <img src="./Part_1/Roary.png" /> </a>
+                <a href="https://github.com/yikedou/Roary" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+
+            </div>
+
+            <div id="introduction" class="section level1">
+                <h1><span class="header-section-number">4</span> Phylogenetic</h1>
+
+                <h3 style="text-indent:2em">快速入门：</h3>
+                <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
+                <ul>
+                    <li><a href="https://itol.embl.de/" target="_blank"> iTOL</a></li>
+                    <li><a href="http://pangenome.de/" target="_blank"> panX</a></li>
+                </ul>
+                <br>
+
+                <h2> <span class="header-section-number">4.1</span>MAFFT</h2>
+                <p style="text-indent:2em">
+                    MAFFT 一种高速且准确的比对软件。速度：Muscle>MAFFT>ClustalW>T-Coffee；比对准确性：MAFFT>Muscle>T-Coffee>ClustalW。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/MAFFT.jpg" target="_blank"> <img src="./Part_1/MAFFT.jpg" /> </a>
+                <a href="http://blog.sciencenet.cn/blog-460481-706083.html" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+                <h2> <span class="header-section-number">4.2</span>iqtree2</h2>
+                <p style="text-indent:2em">
+                    iqtree2 一种高效准确并能提供多种方法的建树软件。服务器地址：http://iqtree.cibiv.univie.ac.at
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/iqtree.PNG" target="_blank"> <img src="./Part_1/iqtree.PNG" /> </a>
+                <a href="https://www.jianshu.com/p/fa057daadfbc" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+
+                <h2> <span class="header-section-number">4.3</span>ggtree</h2>
+                <p style="text-indent:2em">
+                    ggtree 可用于绘制高度自定义进化树的R包。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/ggtree.PNG" target="_blank"> <img src="./Part_1/ggtree.PNG" /> </a>
+                <a href="https://yulab-smu.top/treedata-book/chapter4.html" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+                <h2> <span class="header-section-number">4.4</span>iTOL</h2>
+                <p style="text-indent:2em">
+                    iTOL 简单高效构建复杂进化树的网页服务器。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/iTOL.png" target="_blank"> <img src="./Part_1/iTOL.png" /> </a>
+                <a href="https://www.pianshen.com/article/15994828/" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+
+
+
+            </div>
+
+            <div id="introduction" class="section level1">
+                <h1><span class="header-section-number">5</span>Resources</h1>
+                <ul>
+                    <li><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Resources" target="_blank">各种软件</a></li>
+                </ul>
+            </div>
+
+            <h1><span class="header-section-number"></span> <strong>8. 参考文献 </strong> </h1>
+            <div id="references" class="section level1 unnumbered">
+                <h1>References</h1>
+                <div id="refs" class="references">
+                    <div id="ref-Conley:2014ha">
+                        <p>Conley, Christopher J, Rob Smith, Ralf J O Torgrip, Ryan M Taylor, Ralf Tautenhahn, and John T Prince. 2014. “Massifquant: open-source Kalman filter-based XC-MS isotope trace feature detection.” <em>Bioinformatics</em> 30 (18):
+                            2636–43.
                         </p>
-                        <a href="./Part_1/Orthofinder.PNG" target="_blank"> <img src="./Part_1/Orthofinder.PNG" /> </a>
-                        <a href="https://www.jianshu.com/p/4d29d24883d2" target="_blank">
-                            <p style="text-indent:2em"><strong>教程</strong></p>
-                        </a>
-                        <hr>
-                        <br>
-
-
-                        <h2> <span class="header-section-number">3.2</span>Roary</h2>
-                        <p style="text-indent:2em">
-                            Roary是一款由The Wellcome Trust SangerInstitute主导开发的，可以快速地对大规模原核生物基因组进行泛基因组分析的软件。其优点在于可以在短时间内对数千规模的微生物基因组进行泛基因组分析。
-                            <a href="http://mummer.sourceforge.net/" target="_blank">
-                                <strong>http://mummer.sourceforge.net/</strong></a>
-                        </p>
-                        <a href="./Part_1/Roary.png" target="_blank"> <img src="./Part_1/Roary.png" /> </a>
-                        <a href="https://github.com/yikedou/Roary" target="_blank">
-                            <p style="text-indent:2em"><strong>教程</strong></p>
-                        </a>
-                        <hr>
-                        <br>
-
-
                     </div>
-
-                    <div id="introduction" class="section level1">
-                        <h1><span class="header-section-number">4</span> Phylogenetic</h1>
-
-                        <h3 style="text-indent:2em">快速入门：</h3>
-                        <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
-                        <ul>
-                            <li><a href="https://itol.embl.de/" target="_blank"> iTOL</a></li>
-                            <li><a href="http://pangenome.de/" target="_blank"> panX</a></li>
-                        </ul>
-                        <br>
-
-                        <h2> <span class="header-section-number">4.1</span>MAFFT</h2>
-                        <p style="text-indent:2em">
-                            MAFFT 一种高速且准确的比对软件。速度：Muscle>MAFFT>ClustalW>T-Coffee；比对准确性：MAFFT>Muscle>T-Coffee>ClustalW。
-                            <a href="http://mummer.sourceforge.net/" target="_blank">
-                                <strong>http://mummer.sourceforge.net/</strong></a>
-                        </p>
-                        <a href="./Part_1/MAFFT.jpg" target="_blank"> <img src="./Part_1/MAFFT.jpg" /> </a>
-                        <a href="http://blog.sciencenet.cn/blog-460481-706083.html" target="_blank">
-                            <p style="text-indent:2em"><strong>教程</strong></p>
-                        </a>
-                        <hr>
-                        <br>
-                        <h2> <span class="header-section-number">4.2</span>iqtree2</h2>
-                        <p style="text-indent:2em">
-                            iqtree2 一种高效准确并能提供多种方法的建树软件。服务器地址：http://iqtree.cibiv.univie.ac.at
-                            <a href="http://mummer.sourceforge.net/" target="_blank">
-                                <strong>http://mummer.sourceforge.net/</strong></a>
-                        </p>
-                        <a href="./Part_1/iqtree.PNG" target="_blank"> <img src="./Part_1/iqtree.PNG" /> </a>
-                        <a href="https://www.jianshu.com/p/fa057daadfbc" target="_blank">
-                            <p style="text-indent:2em"><strong>教程</strong></p>
-                        </a>
-                        <hr>
-                        <br>
-
-
-                        <h2> <span class="header-section-number">4.3</span>ggtree</h2>
-                        <p style="text-indent:2em">
-                            ggtree 可用于绘制高度自定义进化树的R包。
-                            <a href="http://mummer.sourceforge.net/" target="_blank">
-                                <strong>http://mummer.sourceforge.net/</strong></a>
-                        </p>
-                        <a href="./Part_1/ggtree.PNG" target="_blank"> <img src="./Part_1/ggtree.PNG" /> </a>
-                        <a href="https://yulab-smu.top/treedata-book/chapter4.html" target="_blank">
-                            <p style="text-indent:2em"><strong>教程</strong></p>
-                        </a>
-                        <hr>
-                        <br>
-
-                        <h2> <span class="header-section-number">4.4</span>iTOL</h2>
-                        <p style="text-indent:2em">
-                            iTOL 简单高效构建复杂进化树的网页服务器。
-                            <a href="http://mummer.sourceforge.net/" target="_blank">
-                                <strong>http://mummer.sourceforge.net/</strong></a>
-                        </p>
-                        <a href="./Part_1/iTOL.png" target="_blank"> <img src="./Part_1/iTOL.png" /> </a>
-                        <a href="https://www.pianshen.com/article/15994828/" target="_blank">
-                            <p style="text-indent:2em"><strong>教程</strong></p>
-                        </a>
-                        <hr>
-                        <br>
-
-
-
-
+                    <div id="ref-Gatto:2012io">
+                        <p>Gatto, Laurent, and Kathryn S Lilley. 2012. “MSnbase-an R/Bioconductor package for isobaric tagged mass spectrometry data visualization, processing and quantitation.”
+                            <em>Bioinformatics</em> 28 (2): 288–89.</p>
                     </div>
-
-                    <div id="introduction" class="section level1">
-                        <h1><span class="header-section-number">5</span>Resources</h1>
-                        <ul>
-                            <li><a href="https://github.com/Fanjaro/Genomics-Vis-Workshop/tree/master/Resources" target="_blank">各种软件</a></li>
-                        </ul>
+                    <div id="ref-Katajamaa:2006jh">
+                        <p>Katajamaa, Mikko, Jarkko Miettinen, and Matej Oresic. 2006. “MZmine: toolbox for processing and visualization of mass spectrometry based molecular profile data.”
+                            <em>Bioinformatics</em> 22 (5): 634–36.</p>
                     </div>
-
-
-                    <div id="references" class="section level1 unnumbered">
-                        <h1>References</h1>
-                        <div id="refs" class="references">
-                            <div id="ref-Conley:2014ha">
-                                <p>Conley, Christopher J, Rob Smith, Ralf J O Torgrip, Ryan M Taylor, Ralf Tautenhahn, and John T Prince. 2014. “Massifquant: open-source Kalman filter-based XC-MS isotope trace feature detection.” <em>Bioinformatics</em>                                    30 (18): 2636–43.
-                                </p>
-                            </div>
-                            <div id="ref-Gatto:2012io">
-                                <p>Gatto, Laurent, and Kathryn S Lilley. 2012. “MSnbase-an R/Bioconductor package for isobaric tagged mass spectrometry data visualization, processing and quantitation.”
-                                    <em>Bioinformatics</em> 28 (2): 288–89.</p>
-                            </div>
-                            <div id="ref-Katajamaa:2006jh">
-                                <p>Katajamaa, Mikko, Jarkko Miettinen, and Matej Oresic. 2006. “MZmine: toolbox for processing and visualization of mass spectrometry based molecular profile data.”
-                                    <em>Bioinformatics</em> 22 (5): 634–36.</p>
-                            </div>
-                            <div id="ref-Prince:2006jj">
-                                <p>Prince, John T, and Edward M Marcotte. 2006. “Chromatographic alignment of ESI-LC-MS proteomics data sets by ordered bijective interpolated warping.” <em>Analytical
+                    <div id="ref-Prince:2006jj">
+                        <p>Prince, John T, and Edward M Marcotte. 2006. “Chromatographic alignment of ESI-LC-MS proteomics data sets by ordered bijective interpolated warping.” <em>Analytical
                                     Chemistry</em> 78 (17): 6140–52.</p>
-                            </div>
-                            <div id="ref-Smith:2006ic">
-                                <p>Smith, Colin A, Elizabeth J Want, Grace O’Maille, Ruben Abagyan, and Gary Siuzdak. 2006. “XCMS: processing mass spectrometry data for metabolite profiling using nonlinear peak alignment, matching, and identification.”
-                                    <em>Analytical Chemistry</em> 78 (3): 779–87.</p>
-                            </div>
-                            <div id="ref-Smith:2014di">
-                                <p>Smith, Rob, Andrew D Mathis, Dan Ventura, and John T Prince. 2014. “Proteomics, lipidomics, metabolomics: a mass spectrometry tutorial from a computer scientist’s point of view.” <em>BMC Bioinformatics</em> 15 Suppl 7 (Suppl
-                                    7): S9.
-                                </p>
-                            </div>
-                            <div id="ref-Tautenhahn:2008fx">
-                                <p>Tautenhahn, Ralf, Christoph Böttcher, and Steffen Neumann. 2008. “Highly sensitive feature detection for high resolution LC/MS.” <em>BMC Bioinformatics</em> 9 (1): 504.
-                                </p>
-                            </div>
-                        </div>
                     </div>
-
-
-
+                    <div id="ref-Smith:2006ic">
+                        <p>Smith, Colin A, Elizabeth J Want, Grace O’Maille, Ruben Abagyan, and Gary Siuzdak. 2006. “XCMS: processing mass spectrometry data for metabolite profiling using nonlinear peak alignment, matching, and identification.”
+                            <em>Analytical Chemistry</em> 78 (3): 779–87.</p>
+                    </div>
+                    <div id="ref-Smith:2014di">
+                        <p>Smith, Rob, Andrew D Mathis, Dan Ventura, and John T Prince. 2014. “Proteomics, lipidomics, metabolomics: a mass spectrometry tutorial from a computer scientist’s point of view.” <em>BMC Bioinformatics</em> 15 Suppl 7 (Suppl 7):
+                            S9.
+                        </p>
+                    </div>
+                    <div id="ref-Tautenhahn:2008fx">
+                        <p>Tautenhahn, Ralf, Christoph Böttcher, and Steffen Neumann. 2008. “Highly sensitive feature detection for high resolution LC/MS.” <em>BMC Bioinformatics</em> 9 (1): 504.
+                        </p>
+                    </div>
                 </div>
             </div>
 
+
+
         </div>
+    </div>
 
-        <script>
-            // add bootstrap table styles to pandoc tables
-            function bootstrapStylePandocTables() {
-                $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
-            }
-            $(document).ready(function() {
-                bootstrapStylePandocTables();
+    </div>
+
+    <script>
+        // add bootstrap table styles to pandoc tables
+        function bootstrapStylePandocTables() {
+            $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+        }
+        $(document).ready(function() {
+            bootstrapStylePandocTables();
+        });
+    </script>
+
+    <!-- tabsets -->
+
+    <script>
+        $(document).ready(function() {
+            window.buildTabsets("TOC");
+        });
+
+        $(document).ready(function() {
+            $('.tabset-dropdown > .nav-tabs > li').click(function() {
+                $(this).parent().toggleClass('nav-tabs-open')
             });
-        </script>
+        });
+    </script>
 
-        <!-- tabsets -->
+    <!-- code folding -->
 
-        <script>
-            $(document).ready(function() {
-                window.buildTabsets("TOC");
-            });
+    <script>
+        $(document).ready(function() {
 
-            $(document).ready(function() {
-                $('.tabset-dropdown > .nav-tabs > li').click(function() {
-                    $(this).parent().toggleClass('nav-tabs-open')
-                });
-            });
-        </script>
+            // move toc-ignore selectors from section div to header
+            $('div.section.toc-ignore')
+                .removeClass('toc-ignore')
+                .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
 
-        <!-- code folding -->
+            // establish options
+            var options = {
+                selectors: "h1,h2",
+                theme: "bootstrap3",
+                context: '.toc-content',
+                hashGenerator: function(text) {
+                    return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+                },
+                ignoreSelector: ".toc-ignore",
+                scrollTo: 0
+            };
+            options.showAndHide = true;
+            options.smoothScroll = true;
 
-        <script>
-            $(document).ready(function() {
+            // tocify
+            var toc = $("#TOC").tocify(options).data("toc-tocify");
+        });
+    </script>
 
-                // move toc-ignore selectors from section div to header
-                $('div.section.toc-ignore')
-                    .removeClass('toc-ignore')
-                    .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-                // establish options
-                var options = {
-                    selectors: "h1,h2",
-                    theme: "bootstrap3",
-                    context: '.toc-content',
-                    hashGenerator: function(text) {
-                        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-                    },
-                    ignoreSelector: ".toc-ignore",
-                    scrollTo: 0
-                };
-                options.showAndHide = true;
-                options.smoothScroll = true;
-
-                // tocify
-                var toc = $("#TOC").tocify(options).data("toc-tocify");
-            });
-        </script>
-
-        <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({ "HTML-CSS": { styles: { ".MathJax_Display": { "text-align": "center", padding: "0px 150px 0px 65px", margin: "0px 0px 0.5em" }, "@media screen and (max-width: 991px)": { ".MathJax_Display": { "text-align": "center", padding: "0 0
-            0 0" } } } } });
-        </script>
-        <!-- dynamically load mathjax for compatibility with self-contained -->
-        <script>
-            (function() {
-                var script = document.createElement("script");
-                script.type = "text/javascript";
-                script.src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-                document.getElementsByTagName("head")[0].appendChild(script);
-            })();
-        </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ "HTML-CSS": { styles: { ".MathJax_Display": { "text-align": "center", padding: "0px 150px 0px 65px", margin: "0px 0px 0.5em" }, "@media screen and (max-width: 991px)": { ".MathJax_Display": { "text-align": "center", padding: "0 0
+        0 0" } } } } });
+    </script>
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+    <script>
+        (function() {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+            document.getElementsByTagName("head")[0].appendChild(script);
+        })();
+    </script>
 
 </body>
 
