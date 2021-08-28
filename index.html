@@ -22906,15 +22906,132 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 <a href="http://ardb.cbcb.umd.edu/" target="_blank">
                     <p style="text-indent:2em"> http://ardb.cbcb.umd.edu/ </p>
                 </a>
-                <p><pre class='shell'><code> rgi main -i path -o name -t contig -a BLAST --clean -n 4 </code></pre></p>
+                <p><pre class='shell'><code> rgi -i path -o name -t contig -a BLAST --clean -n 4 </code></pre></p>
                 <li style="text-indent:2em"> VFDB </li>
                 <a href="http://www.mgc.ac.cn/cgi-bin/VFs/v5/main.cgi?func=VFanalyzer" target="_blank">
                     <p style="text-indent:2em"> http://www.mgc.ac.cn/cgi-bin/VFs/v5/main.cgi?func=VFanalyzer </p>
                 </a>
 
                 <h1><span class="header-section-number"></span> <strong>5. 比较基因组 </strong> </h1>
+                <h2> <span class="header-section-number"></span>概论</h2>
+                <p style="text-indent:2em">比较基因组学是一个生物学研究领域，比较不同生物的基因组特征, 常见的包括基因序列、基因顺序、调控序列和其他基因组结构标志。简单来说就是研究具有一定相似性水平的多个物种或个体的生物学异同以及生物之间的进化关系。(在非表观遗传的结构与功能水平寻找异同，推断进化)</p>
+                <h2> <span class="header-section-number">5.1</span>比较结构</h2>
+                <a href="./pipeline-44.PNG" target="_blank"><img src="./pipeline-44.PNG" target="_blank" alt="简要" /></a>
+                <h3> <span class="header-section-number"></span>PhyloProfile</h3>
+                <p style="text-indent:2em">
+                    PhyloProfile 是一个R软件包，用于构建物种进化树与对应基因频次统计.
+                    <a href="https://github.com/BIONF/PhyloProfile" target="_blank">
+                        <strong>https://github.com/BIONF/PhyloProfile</strong></a>
+                </p>
+                <a href="./pipeline-34.PNG" target="_blank"> <img src="./pipeline-34.PNG" /> </a>
+                </a>
+                <hr>
 
-                <h2> <span class="header-section-number">5.1</span>ACT</h2>
+                <h3> <span class="header-section-number"></span>gggenes</h3>
+                <p style="text-indent:2em">
+                    gggenes 是一个R软件包，用于绘制多个基因比较下的基因结构.
+                    <a href="https://wilkox.org/gggenes/" target="_blank">
+                        <strong>https://wilkox.org/gggenes/</strong></a>
+                </p>
+                <a href="./pipeline-47.PNG" target="_blank"> <img src="./pipeline-47.PNG" /> </a>
+                </a>
+                <hr>
+
+                <h3> <span class="header-section-number"></span>SyntTax</h3>
+                <p style="text-indent:2em">
+                    SyntTax 在线浏览比较基因组下的同源基因.
+                    <a href="https://archaea.i2bc.paris-saclay.fr/" target="_blank">
+                        <strong>https://archaea.i2bc.paris-saclay.fr/</strong></a>
+                </p>
+                <a href="./pipeline-48.PNG" target="_blank"> <img src="./pipeline-48.PNG" /> </a>
+                </a>
+                <hr>
+                <br>
+
+                <h3> <span class="header-section-number"></span>其他</h3>
+                <p style="text-indent:2em">
+                    其他还有很多例如 %GC ANI(pyani)
+                </p>
+                <a href="./pipeline-50.PNG" target="_blank"> <img src="./pipeline-50.PNG" /> </a>
+                <a href="./pipeline-51.PNG" target="_blank"> <img src="./pipeline-51.PNG" /> </a>
+                <a href="./pipeline-53.PNG" target="_blank"> <img src="./pipeline-53.PNG" /> </a>
+                </a>
+                <hr>
+                <br>
+
+
+                <h2> <span class="header-section-number">5.2</span>比较功能</h2>
+
+                <h3> <span class="header-section-number"></span>MicrobeAnnotator/ ghostkoala + ggplot2
+                </h3>
+                <p style="text-indent:2em">
+                    MicrobeAnnotator 宏基因组kegg注释流程.
+                    <a href="https://github.com/cruizperez/MicrobeAnnotator" target="_blank">
+                        <strong>https://github.com/cruizperez/MicrobeAnnotator</strong></a>
+                </p>
+                <a href="./pipeline-45.PNG" target="_blank"><img src="./pipeline-45.PNG" target="_blank" alt="简要" /></a>
+                </a>
+                <hr>
+
+                <h3> <span class="header-section-number"></span>PhyD3</h3>
+                <p style="text-indent:2em">
+                    PhyD3 和 Evolview itol ggtree 一样酷炫
+                    <a href="https://phyd3.bits.vib.be/" target="_blank">
+                        <strong>https://phyd3.bits.vib.be/</strong></a>
+                </p>
+                <a href="./pipeline-46.PNG" target="_blank"><img src="./pipeline-46.PNG" target="_blank" alt="简要" /></a>
+                </a>
+                <hr>
+
+                <br>
+                <h2> <span class="header-section-number">5.3</span>比较同源</h2>
+                <a href="./pipeline-43.PNG" target="_blank"><img src="./pipeline-43.PNG" target="_blank" alt="简要" /></a>
+
+                <div width="2000px" height="500px">
+                    <a href="./pipeline-37.PNG" target="_blank"><img src="./pipeline-37.PNG" target="_blank" width="2000px" height="500px" alt="简要" /></a>
+
+                </div>
+
+                <h3> <span class="header-section-number"></span>OrthoFinder2</h3>
+                <p style="text-indent:2em">
+                    OrthoFinder2是比较基因组学中的实用的，运行快速，准确的全面的工具。它的主要功能是，找到了正交群和直系同源物，推断出所有正交群的根基因树，并识别那些基因树中的所有基因重复事件。它还为所分析的物种推断出有根的物种树，并将基因重复事件从基因树比对到物种树的分支中。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/Orthofinder.PNG" target="_blank"> <img src="./Part_1/Orthofinder.PNG" /> </a>
+                <a href="https://www.jianshu.com/p/4d29d24883d2" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+
+                <h3> <span class="header-section-number"></span>Roary</h3>
+                <p style="text-indent:2em">
+                    Roary是一款由The Wellcome Trust SangerInstitute主导开发的，可以快速地对大规模原核生物基因组进行泛基因组分析的软件。其优点在于可以在短时间内对数千规模的微生物基因组进行泛基因组分析。
+                    <a href="http://mummer.sourceforge.net/" target="_blank">
+                        <strong>http://mummer.sourceforge.net/</strong></a>
+                </p>
+                <a href="./Part_1/Roary.png" target="_blank"> <img src="./Part_1/Roary.png" /> </a>
+                <a href="https://github.com/yikedou/Roary" target="_blank">
+                    <p style="text-indent:2em"><strong>教程</strong></p>
+                </a>
+                <hr>
+                <br>
+
+                <h3> <span class="header-section-number"></span>Orthovenn2</h3>
+                <p style="text-indent:2em">
+                    Orthovenn2
+                    <a href="https://orthovenn2.bioinfotoolkits.net./home" target="_blank">
+                        <strong>https://orthovenn2.bioinfotoolkits.net./home</strong></a>
+                </p>
+                <a href="./pipeline-49.PNG" target="_blank"><img src="./pipeline-49.PNG" target="_blank" alt="简要" /></a>
+                </a>
+                <hr>
+
+                <h2> <span class="header-section-number">5.4</span>Collinearity/Synteny</h2>
+
+                <h3> <span class="header-section-number"></span>ACT</h3>
                 <p style="text-indent:2em">
                     Artemis Comparison Tool (ACT) 是一个显示两个或多个DNA序列之间成对比较的工具。它可以用于识别和分析基因组之间的相似和差异区域，并在整个序列及其注释的背景下探索同线性的保守性。
                 </p>
@@ -22926,7 +23043,7 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 <hr>
                 <br>
 
-                <h2> <span class="header-section-number">5.2</span>Mummer</h2>
+                <h3> <span class="header-section-number"></span>Mummer</h3>
                 <p style="text-indent:2em">
                     MUMmer 是一个快速比对软件，适用于多个基因组完成图或是草图间的比对。
                     <a href="http://mummer.sourceforge.net/" target="_blank">
@@ -22940,7 +23057,7 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 <br>
 
 
-                <h2> <span class="header-section-number">5.3</span>MCscan</h2>
+                <h3> <span class="header-section-number"></span>MCscanX</h3>
                 <p style="text-indent:2em">
                     MCscanX 是一个快速比对软件，适用于多个基因组完成图或是草图间的比对。
                     <a href="http://mummer.sourceforge.net/" target="_blank">
@@ -22953,7 +23070,40 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 <hr>
                 <br>
 
-                <h2> <span class="header-section-number">5.4</span>Parsnp</h2>
+
+                <h2> <span class="header-section-number">5.5</span>Pan-Genome</h2>
+                <p style="text-indent:2em">泛基因组是为描述一个物种基因组而提出的概念，指同一细菌物种中所有菌株中所有基因的集合，而不单纯以某个菌株为一个物种的全基因组。会需要使用泛基因组的原因是水平基因转移造成不同菌株之间所拥有的基因相差甚大。</p>
+                <a href="./pipeline-55.PNG" target="_blank"><img src="./pipeline-55.PNG" target="_blank" alt="简要" /></a>
+                <a href="./pipeline-56.PNG" target="_blank"><img src="./pipeline-56.PNG" target="_blank" alt="简要" /></a>
+                <a href="./pipeline-57.PNG" target="_blank"><img src="./pipeline-57.PNG" target="_blank" alt="简要" /></a>
+                <h3> <span class="header-section-number"></span>PGAP</h3>
+                <p style="text-indent:2em">
+                    BPGA - an ultra-fast pan-genome analysis pipeline
+                    <a href="ttp://pgap.sourceforge.net/" target="_blank">
+                        <strong>http://pgap.sourceforge.net/</strong></a>
+                </p>
+                <a href="./pipeline-35.PNG" target="_blank"><img src="./pipeline-35.PNG" target="_blank" alt="简要" /></a>
+                <hr>
+                <br>
+
+                <h3> <span class="header-section-number"></span>peppan</h3>
+                <p style="text-indent:2em">
+                    <a href="https://github.com/zheminzhou/PEPPAN" target="_blank">
+                        <strong>https://github.com/zheminzhou/PEPPAN/</strong></a>
+                </p>
+                <a href="./pipeline-54.PNG" target="_blank"><img src="./pipeline-54.PNG" target="_blank" alt="简要" /></a>
+                <hr>
+                <br>
+
+                <h2> <span class="header-section-number">5.6</span>SNP</h2>
+                <h3><span class="header-section-number"></span> snippy </h3>
+                <p style="text-indent:2em">
+                    快速比对基因组得到snp indel
+                    <a href="https://github.com/tseemann/snippy" target="_blank">
+                        <strong>https://github.com/tseemann/snippy</strong></a>
+                </p>
+
+                <h3> <span class="header-section-number"></span>Parsnp</h3>
                 <p style="text-indent:2em">
                     Parsnp 是一个快速比对SNP软件，适用于多个基因组完成图或是草图间的SNP比对。
                     <a href="https://harvest.readthedocs.io/en/latest/" target="_blank">
@@ -22963,53 +23113,35 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 <hr>
                 <br>
 
-                <h2> <span class="header-section-number">5.5</span>OrthoFinder2</h2>
-                <p style="text-indent:2em">
-                    OrthoFinder是比较基因组学中的实用的，运行快速，准确的全面的工具。它的主要功能是，找到了正交群和直系同源物，推断出所有正交群的根基因树，并识别那些基因树中的所有基因重复事件。它还为所分析的物种推断出有根的物种树，并将基因重复事件从基因树比对到物种树的分支中。
-                    <a href="http://mummer.sourceforge.net/" target="_blank">
-                        <strong>http://mummer.sourceforge.net/</strong></a>
-                </p>
-                <a href="./Part_1/Orthofinder.PNG" target="_blank"> <img src="./Part_1/Orthofinder.PNG" /> </a>
-                <a href="https://www.jianshu.com/p/4d29d24883d2" target="_blank">
-                    <p style="text-indent:2em"><strong>教程</strong></p>
-                </a>
-                <hr>
-                <br>
 
-
-                <h2> <span class="header-section-number">5.6</span>Roary</h2>
-                <p style="text-indent:2em">
-                    Roary是一款由The Wellcome Trust SangerInstitute主导开发的，可以快速地对大规模原核生物基因组进行泛基因组分析的软件。其优点在于可以在短时间内对数千规模的微生物基因组进行泛基因组分析。
-                    <a href="http://mummer.sourceforge.net/" target="_blank">
-                        <strong>http://mummer.sourceforge.net/</strong></a>
-                </p>
-                <a href="./Part_1/Roary.png" target="_blank"> <img src="./Part_1/Roary.png" /> </a>
-                <a href="https://github.com/yikedou/Roary" target="_blank">
-                    <p style="text-indent:2em"><strong>教程</strong></p>
-                </a>
-                <hr>
-                <br>
-
-                <h3 style="text-indent:2em">其他工具：</h3>
-                <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
-                <ul>
-                    <li><a href="https://orthovenn2.bioinfotoolkits.net./home" target="_blank"> Orthovenn2</a></li>
-                    <li><a href="http://pangenome.de/" target="_blank"> panX</a></li>
-                </ul>
-                <br>
 
                 <h1><span class="header-section-number"></span> <strong>6. 进化分析 </strong> </h1>
-                <h2><span class="header-section-number">6.1</span> 在线工具 </h2>
+                <h2> <span class="header-section-number"></span>概论</h2>
+                <a href="./pipeline-38.PNG" target="_blank"><img src="./pipeline-38.PNG" target="_blank" alt="简要" /></a>
+                <a href="./pipeline-39.PNG" target="_blank"><img src="./pipeline-39.PNG" target="_blank" alt="简要" /></a>
+                <a href="./pipeline-41.PNG" target="_blank"><img src="./pipeline-41.PNG" target="_blank" alt="简要" /></a>
+                <a href="./pipeline-42.PNG" target="_blank"><img src="./pipeline-42.PNG" target="_blank" alt="简要" /></a>
 
-                <h3 style="text-indent:2em">快速入门：</h3>
-                <p style="text-indent:2em">一些帮助研究者实用的快速出图的工具：</p>
+                <a href="./pipeline-36.PNG" target="_blank"><img src="./pipeline-36.PNG" target="_blank" alt="简要" /></a>
+                <a href="./pipeline-59.PNG" target="_blank"><img src="./pipeline-59.PNG" target="_blank" alt="简要" /></a>
+                <h2><span class="header-section-number">6.1</span> 实用工具 </h2>
                 <ul>
-                    <li><a href="https://itol.embl.de/" target="_blank"> iTOL</a></li>
-                    <li><a href="http://pangenome.de/" target="_blank"> panX</a></li>
+
+                    <li><a href="http://www.clustal.org/omega/" target="_blank"> Clustal Omega </a></li>
+                    <li><a href="https://github.com/ddarriba/prottest3" target="_blank"> prottest3 </a></li>
+                    <li><a href="http://abacus.gene.ucl.ac.uk/software/paml.html" target="_blank"> PAML </a></li>
+                    <li><a href="https://github.com/stamatak/standard-RAxML" target="_blank"> RAxML </a></li>
+                    <li><a href="http://www.beast2.org/" target="_blank"> beast2 </a></li>
+                    <li><a href="http://loco.biosci.arizona.edu/r8s/" target="_blank"> r8s </a></li>
+                    <li><a href="http://www.microbesonline.org/fasttree/#Install" target="_blank"> FastTree </a></li>
+                    <li><a href="http://www.timetree.org/" target="_blank"> Time Tree </a></li>
+                    <li><a href="http://www.evolgenius.info/evolview.html" target="_blank"> EvolView </a></li>
                 </ul>
                 <br>
 
-                <h2> <span class="header-section-number">6.2</span>MAFFT</h2>
+                <h2> <span class="header-section-number">6.2</span>比对</h2>
+
+                <h3> <span class="header-section-number"></span>MAFFT</h3>
                 <p style="text-indent:2em">
                     MAFFT 一种高速且准确的比对软件。速度：Muscle>MAFFT>ClustalW>T-Coffee；比对准确性：MAFFT>Muscle>T-Coffee>ClustalW。
                     <a href="http://mummer.sourceforge.net/" target="_blank">
@@ -23021,7 +23153,18 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 </a>
                 <hr>
                 <br>
-                <h2> <span class="header-section-number">6.3</span>iqtree2</h2>
+
+                <h3> <span class="header-section-number"></span>Gblocks</h3>
+                <p style="text-indent:2em">
+                    Gblocks 比对后去除对齐的序列，用以加速进化树构建
+                    <a href="http://molevol.cmima.csic.es/castresana/Gblocks.html" target="_blank">
+                        <strong>http://molevol.cmima.csic.es/castresana/Gblocks.html</strong></a>
+                </p>
+
+
+
+                <h2> <span class="header-section-number">6.3</span>建树</h2>
+                <h3> <span class="header-section-number"></span>iqtree2</h3>
                 <p style="text-indent:2em">
                     iqtree2 一种高效准确并能提供多种方法的建树软件。服务器地址：http://iqtree.cibiv.univie.ac.at
                     <a href="http://mummer.sourceforge.net/" target="_blank">
@@ -23031,11 +23174,21 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 <a href="https://www.jianshu.com/p/fa057daadfbc" target="_blank">
                     <p style="text-indent:2em"><strong>教程</strong></p>
                 </a>
+                <br>
+
+                <h3> <span class="header-section-number"></span>Gubbins</h3>
+                <p style="text-indent:2em">
+                    Gubbins 去除水平基因转移对建树的影响后构建进化树
+                    <a href="https://github.com/sanger-pathogens/gubbins" target="_blank">
+                        <strong>https://github.com/sanger-pathogens/gubbins</strong></a>
+                </p>
                 <hr>
                 <br>
 
 
-                <h2> <span class="header-section-number">6.4</span>ggtree</h2>
+                <h2> <span class="header-section-number">6.4</span>美化</h2>
+
+                <h3> <span class="header-section-number"></span>ggtree</h3>
                 <p style="text-indent:2em">
                     ggtree 可用于绘制高度自定义进化树的R包。
                     <a href="http://mummer.sourceforge.net/" target="_blank">
@@ -23048,7 +23201,7 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 <hr>
                 <br>
 
-                <h2> <span class="header-section-number">6.5</span>iTOL</h2>
+                <h3> <span class="header-section-number"></span>iTOL</h3>
                 <p style="text-indent:2em">
                     iTOL 简单高效构建复杂进化树的网页服务器。
                     <a href="http://mummer.sourceforge.net/" target="_blank">
@@ -23061,15 +23214,6 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 <hr>
                 <br>
 
-
-                <hr>
-                <h2><span class="header-section-number">6.6</span> snippy </h2>
-                <p style="text-indent:2em">
-                    快速比对基因组得到snp indel
-                    <a href="https://github.com/tseemann/snippy" target="_blank">
-                        <strong>https://github.com/tseemann/snippy</strong></a>
-                </p>
-                <hr>
 
                 <h1><span class="header-section-number"></span> <strong>7. 可视化专题 </strong> </h1>
 
@@ -23181,14 +23325,14 @@ perl CRISPRCasFinder.pl [options] -in <filename.fasta>
                 <hr>
                 <br>
 
-                <h2> <span class="header-section-number">7.6</span>PhyloProfile</h2>
+                <h2> <span class="header-section-number">7.6</span>Easyfig</h2>
                 <p style="text-indent:2em">
-                    PhyloProfile 是一个R软件包，用于生成出版物级的物种基因矩阵.
-                    <a href="https://github.com/BIONF/PhyloProfile" target="_blank">
-                        <strong>https://github.com/BIONF/PhyloProfile</strong></a>
+                    Easyfig，用于生成出版物级的基因和基因组图谱.
+                    <a href="http://mjsull.github.io/Easyfig/" target="_blank">
+                        <strong>http://mjsull.github.io/Easyfig/</strong></a>
                 </p>
-                <a href="./pipeline-34.PNG" target="_blank"> <img src="./pipeline-34.PNG" /> </a>
-                </a>
+
+                <a href="./pipeline-58.PNG" target="_blank"><img src="./pipeline-58.PNG" target="_blank" alt="简要" /></a>
                 <hr>
                 <br>
 
